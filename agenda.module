@@ -1,0 +1,779 @@
+<?php
+include_once 'blocks/agenda.block.inc';
+include_once 'forms/agenda.forms.inc';
+include_once 'includes/agenda.functions.inc';
+require_once(DRUPAL_ROOT . "/modules/node/node.pages.inc");
+define('FIRST_POSITION', 0);
+
+/**
+ * Implements hook_init().
+ */
+function agenda_init() {
+  Global $user; 
+
+  if(drupal_is_front_page() && in_array('administrator', $user->roles)){
+     drupal_goto('admin/config');
+  }
+
+  if(drupal_is_front_page() && in_array('consejero', $user->roles)){
+     drupal_goto('calendario-consejero/diario');
+  }
+
+  if(drupal_is_front_page() && in_array('estudiante', $user->roles)){
+     drupal_goto('servicios-estudiante');
+  }
+
+  if(drupal_is_front_page() && in_array('cordinador', $user->roles)){
+     drupal_goto('calendario-coordinador/reportes-tor');
+  }
+  
+  if (variable_get('config_agenda_front_page') == TRUE && user_is_anonymous() && current_path() != 'user') {
+      drupal_goto('user', array('query' => array('login' => 'agenda')));
+  }
+  
+
+   Global $base_url;
+   drupal_add_js(array('agenda' => array('dominio' => $base_url)), array('type' => 'setting'));
+   drupal_add_js(drupal_get_path('module', 'agenda') . '/js/request.js');
+
+   drupal_add_js(array('agenda' => array('dominio' => $base_url)), array('type' => 'setting'));
+   drupal_add_js(drupal_get_path('module', 'agenda') . '/js/active.js');
+
+   if (current_path() == 'calendario-consejero/diario') {
+      drupal_add_js(drupal_get_path('module', 'agenda') . '/js/agenda.js');
+    }
+}
+
+function agenda_preprocess_html(&$variables) {
+   Global $user;
+   drupal_add_css(drupal_get_path('module', 'agenda') . '/css/style.css');
+   switch (current_path()) {
+     case 'mis-citas':
+        $vars['attributes_array']['class'][] = 'page-calendario-estudiante';
+        $variables['classes_array'][] = 'page-calendario-estudiante';
+     break;
+    case 'user/'.$user->uid.'/edit':
+        $vars['attributes_array']['class'][] = 'page-calendario-estudiante';
+        $variables['classes_array'][] = 'page-calendario-estudiante';
+     break;  
+    case 'node/'.arg(1).'/edit':
+        $vars['attributes_array']['class'][] = 'page-calendario-estudiante';
+        $variables['classes_array'][] = 'page-calendario-estudiante';
+     break;  
+   }
+}
+
+/**
+ * Implementacion del hook menu.
+ */
+
+function agenda_menu() {
+ $items = array();
+
+$items['admin/config/agenda'] = array(
+    'title' => t('Configuration Agenda'),
+    'description' => 'Settings params agenda',
+    'position' => 'left',
+    'weight' => -15,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('agenda_form_config'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/agenda.config.inc',
+  );
+
+ $items['request/%ctools_js'] = array(
+    'title' => t('Create node api ctools'),
+    'page callback' => 'request_callback',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['availability/%/%ctools_js'] = array(
+      'title' => t('Render node save api ctools'),
+      'page callback' => 'render_availability',
+      'page arguments' => array(1),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    );
+
+  $items['terminos/%/%ctools_js'] = array(
+      'title' => t('Render terms && condicions'),
+      'page callback' => 'render_terms',
+      'page arguments' => array(1),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    );
+
+
+  $items['availability-edit/%/%ctools_js'] = array(
+      'title' => t('Edit node api ctools'),
+      'page callback' => 'edit_availability',
+      'page arguments' => array(1),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    );
+
+  $items['availability-delete/%/%ctools_js'] = array(
+      'title' => t('Delete node api ctools'),
+      'page callback' => 'delete_availability',
+      'page arguments' => array(1),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    );
+
+
+  $items['quotes-delete/%/%ctools_js'] = array(
+      'title' => t('Delete Quotes api ctools'),
+      'page callback' => 'quotes_delete',
+      'page arguments' => array(1),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+    );
+
+  $items['quotes-list/%/%ctools_js'] = array(
+      'title' => t('Delete Quotes api ctools'),
+      'page callback' => 'agenda_list_quotes',
+      'page arguments' => array(1),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+  );
+
+  $items['availabilitys-list/%/month'] = array(
+     'title' => t('List render availabilitys consejeros'),
+      'page callback' => 'agenda_availabilitys_list_month',
+      'page arguments' => array(1),
+      'access callback' => TRUE,
+      'type' => MENU_CALLBACK,
+  );
+
+  $items['availabilitys-list-students/%/month'] = array(
+   'title' => 'CTools form example',
+    'page callback' => 'agenda_availabilitys_students_list_month',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['quotes-created/%ctools_js'] = array(
+   'title' => 'Cita Creada',
+    'page callback' => 'quotes_created',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['quotes-created/%ctools_js'] = array(
+   'title' => 'Disponibilidad Creada',
+    'page callback' => 'created_availabilitys',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['availabilitys-full/%ctools_js'] = array(
+    'title' => 'Disponibilidad Llena',
+    'page callback' => 'availabilitys_full',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+   return $items;
+}
+
+function agenda_list_quotes($ajax){
+if ($ajax) {
+    ctools_include('ajax');
+    ctools_include('modal');
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => t('Disponibilidades'),
+      'storage' => arg(1),
+    );
+    $output = ctools_modal_form_wrapper('quotes_list_form', $form_state);
+    if (!empty($form_state['ajax_commands'])) {
+      $output = $form_state['ajax_commands'];
+    }
+    print ajax_render($output);
+    drupal_exit();
+  }
+  else {
+    return drupal_get_form('quotes_list_form');
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+
+function agenda_form_alter(&$form, &$form_state, $form_id) {
+    Global $user;
+    switch ($form_id) {
+     case 'disponibilidad_node_form':
+         $form['title']['#required'] = FALSE;
+         $current_path = explode("/", current_path());
+         $path = array_shift($current_path);
+         if (arg(0) == 'node' && is_numeric(arg(1)) && arg(2) == 'edit' && !user_access('administrator') && is_numeric($_GET['sid'])) {
+               $form['title']['#access'] = FALSE;
+               $form['field_operaciones']['#access'] = FALSE;
+               $form['field_profile']['#access'] = FALSE;
+               $form['field_repeticion']['#access'] = FALSE;
+               $form['field_cupo']['#access'] = FALSE;
+               $form['field_lugar']['#access'] = FALSE;
+               $form['field_fecha']['#access'] = FALSE;
+               $form['field_horario_inicio']['#access'] = FALSE;
+               $form['field_horario_fin']['#access'] = FALSE;
+               $form['field_relation_tor_disiplinario']['#access'] = FALSE;
+               $form['field_citas_agenda']['und']['add_more']['#access'] = FALSE;
+               //field_tipo_de_servicio
+             foreach ($form['field_citas_agenda']['und'] as $key => $value) {
+                 if (is_array($value) && isset($value['#entity']->field_collec_uid) && $form['field_citas_agenda']['und'][$key]['#entity']->field_collec_uid['und'][0]['value'] == $_GET['sid']) {
+                      $service = reset($form['field_tipo_de_servicio']['und']['#default_value']);
+                      $type_service = taxonomy_term_load($service);
+                   
+                      $form['field_citas_agenda']['und'][$key]['field_collec_service_select'] = array(
+                        '#prefix' => '<div class="service-select">',
+                        '#markup' => t('<span>Motivo estudiante:</span><span>'.$type_service->name.'</span>'),
+                        '#suffix' => '</div>', 
+                      );
+
+                      $reason_student = reset($form['field_citas_agenda']['und'][$key]['field_collec_motivo']['und']['#default_value']);
+                      $reason_student_load = taxonomy_term_load($reason_student);
+
+                      $form['field_citas_agenda']['und'][$key]['field_collec_motivo_student_select'] = array(
+                        '#prefix' => '<div class="reason-select-student">',
+                        '#markup' => t('<span>Motivo estudiante:</span><span>'.$reason_student_load->name.'</span>'),
+                        '#suffix' => '</div>', 
+                      );
+
+                      $form['field_citas_agenda']['und'][$key]['field_collec_nombre']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_apellido']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_codigo']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_uid']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_usuario']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_numero_de_documento']['#access'] = FALSE;
+
+                        $query = new EntityFieldQuery();
+                                    $query->entityCondition('entity_type','taxonomy_term')
+                                      ->entityCondition('bundle','motivos_consulta_consejero')
+                                      ->propertyCondition('name', $type_service->name);
+                        $results = $query->execute();
+                        $parent = reset($results['taxonomy_term']);
+                        
+                        $result = db_select('taxonomy_term_hierarchy', 'n')
+                                      ->fields('n',array('tid','parent'))
+                                      ->condition('parent', $parent->tid)
+                                      ->execute();
+                        $data = array();              
+                        while($row=$result->fetchAssoc()) {
+                            $term = taxonomy_term_load($row['tid']);
+                            $data[$term->tid] = $term->name;
+                        } 
+                      $form['field_citas_agenda']['und'][$key]['field_collec_motivo_consejero']['und']['#options'] = $data;    
+                      $form['field_citas_agenda']['und'][$key]['remove_button'] = FALSE;
+                  }else if (is_numeric($key)){
+                      $form['field_citas_agenda']['und'][$key]['field_collec_nombre']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_apellido']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_codigo']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_uid']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_usuario']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_numero_de_documento']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_motivo']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_tipo_de_atencion']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_asistencia']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_render_view_estudiante']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_comentario_cita']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['field_collec_motivo_consejero']['#access'] = FALSE;
+                      $form['field_citas_agenda']['und'][$key]['remove_button'] = FALSE;
+                  }
+             }
+          }
+
+       if ($path == 'request' || $path == 'availability-edit') {
+           $form['title']['#access'] = FALSE;
+           $form['field_operaciones']['#access'] = FALSE;
+           $form['field_profile']['#access'] = FALSE;
+           $form['field_citas_agenda']['#access'] = FALSE;
+           $form['field_historial_citas']['#access'] = FALSE;
+           $form['actions']['cancel'] = array(
+              '#markup' => l(t('Cancel'), '#',
+                 array('attributes' => array('class' => 'ctools-close-modal'),
+                   'external' => TRUE))
+                 );
+       }
+      if (current_path() == 'request/ajax') {
+         $form['field_citas_agenda']['#access'] = FALSE;
+         $form['field_profile']['#access'] = FALSE;
+         $form['actions']['cancel'] = array(
+          '#markup' => l(t('Cancel'), '#',
+             array('attributes' => array('class' => 'ctools-close-modal'),
+                'external' => TRUE))
+             );
+         $form['actions']['submit2'] = array(
+           '#type' => 'submit',
+           '#value' => t('Guardar TOR'),
+           '#submit' => array('agenda_save_node_tor_submit'),
+           '#attributes' => array('class' => array('save_tor_submit')),
+         );
+      }
+      break;
+     case 'user_login':
+
+         if (isset($_GET['login'])) {
+           $form['#attributes']['class'][] = $_GET['login'];
+         }
+
+         $form['name']['#title'] = t('Ingresar');
+         $form['pass']['#title'] = '';
+         $form['name']['#required'] = FALSE;
+          $form['info'] = array(
+            '#type' => 'item',
+            '#markup' => t('Las personas que no tengan usuario y clave uniandes pueden comunicarse con la Decanatura de Estudiantes para recibir atención personalizada, en el teléfono 339 49 49 Ext. 2207, de lunes a viernes en horario de 8:00 a.m a 5:00 p.m.'),
+            '#attributes' => array('class' => array('info-extra-login')),
+          );
+          $form['enlace'] = array(
+            '#type' => 'item',
+            '#markup' => l(t('Olvido su clave'), 'user/password'),
+            '#attributes' => array('class' => array('info-link-login')),
+          );
+      break;
+      case 'user_profile_form':
+          if(!user_access('administrator') && !user_access('consejero')) {
+            $form['account']['#access'] = FALSE;
+            $form['picture']['#access'] = FALSE;
+            $form['actions']['submit']['#access'] = FALSE;
+          }
+      break;
+      }
+}
+
+/**
+ * Implements hook_node_presave().
+ */
+
+function agenda_node_presave($node) {
+  if ($node->type == 'disponibilidad' && !user_access('administrator')) {
+        $time =  taxonomy_term_load($node->field_repeticion['und'][false]['tid']);
+        save_availability_without_repeating($node);
+        switch ($time->name) {
+          case 'Diario':
+          break;
+          case 'Mensual':
+          break;
+          case 'Semanal':
+          break;
+          case '':
+          break;
+        }
+  }
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+
+function agenda_field_formatter_info() {
+  $info = array(
+      'operation_node' => array(
+        'label' => t('Operation Node'),
+        'field types' => array('text'),
+        'description' => t('Field manage edit/delete for node'),
+      ),
+    );
+  return $info;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+
+function agenda_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+    $element = array();
+      switch ($display['type']) {
+        case 'operation_node':
+          foreach ($items as $delta => $item) {
+            $element[$delta] = array(
+              '#theme' => 'operations-node-availability',
+            );
+         }
+          break;
+      }
+      return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+
+function agenda_theme($existing, $type, $theme, $path) {
+  $module_path = drupal_get_path('module', 'agenda');
+  $base = array(
+    'path' => "$module_path/theme",
+  );
+
+  $themes = array(
+    'item-calendar' => $base + array(
+     'template' => 'theme/item-calendar',
+     'variables' => array('value' => NULL),
+    ),
+  );
+
+  $themes = array(
+    'calendar-month-multiple-entity' => $base + array(
+     'template' => 'theme/calendar-month-multiple-entity',
+     'variables' => array('value' => NULL),
+    ),
+  );
+
+  $themes = array(
+    'operations-node-availability' => array(
+    'template' => 'theme/operations-node-availability',
+    ),
+  );
+
+  return $themes;
+}
+
+/**
+ * Implements hook_help().
+ */
+
+function agenda_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#agenda':
+      return '<p>' . t('Help module', array('storage' => 'Help module' )) . '</p>';
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+
+function agenda_permission() {
+  return array(
+    'administer agenda' =>  array(
+      'title' => t('Administer Agenda'),
+      'description' => t('Perform administration agenda'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+
+function agenda_theme_registry_alter(&$theme_registry) {
+    $theme_registry['calendar_item']['path'] = drupal_get_path('module', 'agenda') . '/theme';
+    $theme_registry['calendar_item']['theme path'] = drupal_get_path('module', 'agenda') . '/theme';
+    $theme_registry['calendar_item']['template'] = 'item-calendar';
+    $theme_registry['calendar_month_multiple_entity']['path'] = drupal_get_path('module', 'agenda') . '/theme';
+    $theme_registry['calendar_month_multiple_entity']['theme path'] = drupal_get_path('module', 'agenda') . '/theme';
+    $theme_registry['calendar_month_multiple_entity']['template'] = 'calendar-month-multiple-entity';
+}
+
+/**
+ * Implementation of hook_views_api().
+ */
+function agenda_views_api() {
+    return array(
+     'api' => 3,
+     'path' => drupal_get_path('module', 'agenda') . '/views',
+   );
+}
+
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function agenda_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  switch ($root_path) {
+    case 'user':
+      unset($data['tabs']);
+      break;
+  }
+
+  switch ($router_item['tab_parent']) {
+    case 'calendario-consejero':
+      switch (strlen(arg(2))) {
+        case '10':
+           $data['tabs'][FALSE]['output'][1]['#link']['href'] = "/calendario-consejero/mes/" .  substr(arg(2), 0, -3);
+           $data['tabs'][FALSE]['output'][2]['#link']['href'] = "/calendario-consejero/semanal/" . arg(2);
+           $data['tabs'][FALSE]['output'][3]['#link']['href'] = "/calendario-consejero/diario/" . arg(2);
+          break;
+        case '7':
+           $data['tabs'][FALSE]['output'][1]['#link']['href'] = "/calendario-consejero/mes/"    . arg(2) . '-01';
+           $data['tabs'][FALSE]['output'][2]['#link']['href'] = "/calendario-consejero/semanal/" . arg(2) . '-01';
+           $data['tabs'][FALSE]['output'][3]['#link']['href'] = "/calendario-consejero/diario/" . arg(2) . '-01';
+          break;
+      }
+      break;
+    case 'calendario-estudiante/%':
+       $arg = explode("/",current_path());
+       $tid = $arg[count($arg) - 2]; $uid = $arg[count($arg) - 1];
+       $day_now =  date('d');
+
+       switch (strlen(arg(1))) {
+         case '10':
+            $data['tabs'][FALSE]['output'][1]['#link']['href'] = "/calendario-estudiante/".substr(arg(1), 0, -3)."/mensual/".$tid."/".$uid;
+            $data['tabs'][FALSE]['output'][2]['#link']['href'] = "/calendario-estudiante/".arg(1)."/semanal/".$tid."/".$uid;
+            $data['tabs'][FALSE]['output'][3]['#link']['href'] = "/calendario-estudiante/".arg(1)."/diario/".$tid."/".$uid;
+         break;
+         case '7':
+            $data['tabs'][FALSE]['output'][0]['#link']['href'] = "/calendario-estudiante/".arg(1)."-".$day_now."/mensual/".$tid."/".$uid;
+            $data['tabs'][FALSE]['output'][2]['#link']['href'] = "/calendario-estudiante/".arg(1)."-".$day_now."/semanal/".$tid."/".$uid;
+            $data['tabs'][FALSE]['output'][3]['#link']['href'] = "/calendario-estudiante/".arg(1)."-".$day_now."/diario/".$tid."/".$uid;
+          break;
+       }
+    break;
+  }
+}
+/**
+ * Callback function render obj(node) availability.
+ */
+
+function render_availability($js) {
+ if ($js) {
+    ctools_include('modal');
+    ctools_include('ajax');
+  }
+  $node = node_load(arg(1));
+  $contents = render(node_view($node, 'teaser', NULL));
+  return ctools_modal_render(t('Disponibilidad'), $contents);
+}
+
+function render_terms($js) {
+ if ($js) {
+    ctools_include('modal');
+    ctools_include('ajax');
+    ctools_add_css('ctools-ajax-sample', 'ctools_ajax_sample');
+  }
+  $node = node_load(arg(1));
+  $contents = render(node_view($node, 'teaser', NULL));
+  return ctools_modal_render(t('Terminos y condiciones'), $contents);
+}
+
+/**
+ * Callback function render new obj(node) availability.
+ */
+
+function request_callback($ajax){
+    if ($ajax) {
+     global $user;
+     ctools_include('node.pages', 'node', '');
+     ctools_include('modal');
+     ctools_include('ajax');
+
+     $node = (object) array(
+         'uid' => $user->uid,
+         'name' => (isset($user->name) ? $user->name : ''),
+         'type' => variable_get('content_type'),
+         'language' => LANGUAGE_NONE,
+     );
+
+     $form_state = array(
+         'ajax' => TRUE,
+         'title' => t('Creación de disponibilidad'),
+         'class' => array('add availability'),
+     );
+
+
+     $form_state['build_info']['args'] = array($node);
+     $output = ctools_modal_form_wrapper(variable_get('popup'), $form_state);
+
+     if (!empty($form_state['executed'])) {
+         $output = array();
+         $output[] = ctools_ajax_command_reload();
+     }
+    print ajax_render($output);
+    exit;
+  }else {
+      return drupal_get_form(variable_get('popup'));
+   }
+}
+
+/**
+ * Callback function edit node bundle (availability).
+ */
+
+function edit_availability($js) {
+   if ($js) {
+       global $user;
+       ctools_include('node.pages', 'node', '');
+       ctools_include('modal');
+       ctools_include('ajax');
+
+       $node = node_load(arg(1));
+
+       $form_state = array(
+           'ajax' => TRUE,
+           'title' => t('Editar disponibilidad'),
+       );
+
+       $form_state['build_info']['args'] = array($node);
+       $output = ctools_modal_form_wrapper(variable_get('popup'), $form_state);
+
+       if (!empty($form_state['executed'])) {
+           $output = array();
+           $output[] = ctools_ajax_command_reload();
+       }
+      print ajax_render($output);
+      exit;
+    }else {
+           return drupal_get_form(variable_get('popup'));
+     }
+}
+
+/**
+ * Callback function delete node bundle (availability).
+ */
+
+function delete_availability($js) {
+  if ($js) {
+      ctools_include('ajax');
+      ctools_include('modal');
+
+      $form_state = array(
+        'ajax' => TRUE,
+        'nid' => arg(1),
+        'title' => t('Eliminar'),
+      );
+
+      $output = ctools_modal_form_wrapper('agenda_form', $form_state);
+
+      if (!empty($form_state['ajax_commands'])) {
+        $output = $form_state['ajax_commands'];
+      }
+
+      print ajax_render($output);
+      drupal_exit();
+    }
+    else {
+      return drupal_get_form('agenda_form');
+    }
+}
+
+
+/**
+ * Callback function delete node bundle (availability).
+ */
+
+function quotes_delete($js) {
+  if ($js) {
+      ctools_include('ajax');
+      ctools_include('modal');
+
+      $form_state = array(
+        'ajax' => TRUE,
+        'fcid' => arg(1),
+        'title' => t('Cancelar'),
+      );
+
+      $output = ctools_modal_form_wrapper('quotes_delete_form', $form_state);
+
+      if (!empty($form_state['ajax_commands'])) {
+        $output = $form_state['ajax_commands'];
+      }
+
+      print ajax_render($output);
+      drupal_exit();
+    }
+    else {
+      return drupal_get_form('quotes_delete_form');
+    }
+}
+
+function agenda_availabilitys_list_month($js){
+  if ($js) {
+  $output = arg(1); $nodos = explode("-", $output);
+  foreach ($nodos as $key => $value) {
+    $node = node_load($value);
+    $wrapper = entity_metadata_wrapper('node', $node);
+    $service = $wrapper->field_tipo_de_servicio->value();
+    $hora_start = $wrapper->field_horario_inicio->value();
+    $hora_end = $wrapper->field_horario_fin ->value();
+    $time = $hora_start->name .' a '. $hora_end->name;
+      if (count($wrapper->field_citas_agenda->value()) == $wrapper->field_cupo->value()) {
+        $list_services .= '<li><p>'.l($time.'  |  '.$service->name,'/availabilitys-full/'.$value. '/nojs',array('attributes' => array('class' => 'ctools-use-modal full'))).'</p></li>';
+      }else{
+        $list_services .= '<li><p>'.l($time.'  |  '.$service->name,'/availability/'.$value. '/nojs',array('attributes' => array('class' => 'ctools-use-modal'))).'</p></li>';
+      }
+  }
+    ctools_include('modal'); ctools_include('ajax');
+    return ctools_modal_render(date('l d F Y', $node->created), '<h1 class="availability">Disponibilidades</h1><ul>'.$list_services.'</ul>');
+  }
+}
+
+function agenda_availabilitys_students_list_month($js){
+  if ($js) {
+    ctools_include('ajax');
+    ctools_include('modal');
+    
+    $args = arg(1); $nids = explode("-", $args); $nid = array_shift($nids);
+    $node = node_load($nid);
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => date('l d F Y', $node->created),
+    );
+    $commands = ctools_modal_form_wrapper('agenda_add_quotes_students_form', $form_state);
+    print ajax_render($commands);
+  }
+  else {
+    return drupal_get_form('agenda_add_quotes_students_form');
+  }
+}
+
+function quotes_created(){
+    ctools_include('ajax');
+    ctools_include('modal');
+
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => t('Gracias'),
+    );
+    $output = ctools_modal_form_wrapper('quote_thx_form', $form_state);
+    print ajax_render($output);
+    drupal_exit();
+}
+
+function availabilitys_full(){
+    ctools_include('ajax');
+    ctools_include('modal');
+
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => t('Disponibilidad'),
+    );
+    $output = ctools_modal_form_wrapper('availabilitys_full_form', $form_state);
+    print ajax_render($output);
+    drupal_exit();
+}
+
+function quotes_isset(){
+    ctools_include('ajax');
+    ctools_include('modal');
+
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => t('Gracias'),
+    );
+
+    $output = ctools_modal_form_wrapper('quote_isset_form', $form_state);
+    print ajax_render($output);
+    drupal_exit();
+}
+
+function created_availabilitys(){
+
+    ctools_include('ajax');
+    ctools_include('modal');
+
+    $form_state = array(
+      'ajax' => TRUE,
+      'title' => t('CREADA'),
+    );
+
+    $output = ctools_modal_form_wrapper('created_availabilitys_form', $form_state);
+    print ajax_render($output);
+    drupal_exit();
+}

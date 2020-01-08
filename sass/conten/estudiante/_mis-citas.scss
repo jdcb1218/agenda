@@ -1,0 +1,227 @@
+/*
+//------------------------------------------------------------------------------
+//	Mis Citas
+//------------------------------------------------------------------------------
+*/
+
+/* ------| Filtar citas |----- */
+.page-calendario-estudiante {
+	.filtar-citas {
+		position: relative;
+		label {
+			display: none;
+		}
+		select#edit-options-qoute {
+        width: 153px;
+        background-color: $green;
+        background-image: url(../img/punto-horizontales.svg);
+        background-size: 4%;
+        background-position: 100%;
+        background-repeat: no-repeat;
+        font-size: 17px;
+        color: white;
+        border: none;
+        border-radius: 0px;
+        margin-top: -53px;
+        margin-bottom: 0px;
+        padding: 0px 12px;
+        transition: none;
+        box-shadow: none;
+        appearance: none;
+        float: right;
+		}
+		@include respond-to('tablet-lg') {
+			select#edit-options-qoute {
+				width: 20%;
+				position: initial;
+		    color: #231F20;
+		    background-color: $white;
+		    background-image: url(../img/flecha.png);
+		    background-repeat: no-repeat;
+		    background-size: 15px;
+		    background-position: 93% 10px;
+		    border: 1px solid #ccc;
+		    margin-top: 0px;
+	    	margin-bottom: 27px;
+      }
+	  }
+	}
+}
+/* ------| Tabla de citas del estudiante |----- */
+.page-calendario-estudiante {
+	.view-mis-citas {
+		.view-content {
+			.table-responsive {
+				border: 1px solid $gray;
+				table {
+					tr {
+						&.odd, &.even {
+							background-color: #F5F1F1 !important;
+						}
+						th {
+							font-family: $lato-regular;
+							font-size: 14px;
+							color: $green;
+							border-bottom: 2px solid transparent;
+							line-height: 15px;
+							text-align: center;
+							vertical-align: text-top;
+							&.numero-documento, &.nombre-estudiante, &.apellido-estudiante {
+								width: 93px; /* 135px */
+								white-space: initial;
+							}
+						}
+						td {
+							border-width: 0px 1px 1px 1px;
+							border-bottom-style: dashed;
+							border-right-style: solid;
+							border-color: $gray;
+							vertical-align: inherit;
+							text-align: center;
+							font-family: $lato-regular;
+							font-size: 12px;
+							line-height: 19.75px;
+							color: $black;
+							padding: 5px 8px;
+							white-space:nowrap;
+							&:last-child {
+								border-width: 0px 0px 1px 0px;
+							}
+							&.views-field-php-2 {
+								// display: inline-flex;
+								a {
+										display: block;
+										text-indent: -9999px;
+										font-family: $lato-regular;
+										font-size: 1.4rem;
+										overflow: hidden;
+										background-size: 70%;
+										background-position: 57%;
+										border: none;
+										width: 34px;
+										height: 34px;
+										filter: brightness(1);
+										padding: 5px 0px;
+									&:first-child {
+										background-image: url(../img/button-mas.svg);
+										background-repeat: no-repeat;
+										background-color: $green;
+									}
+									@include respond-to('tablet-lg') {
+										&:first-child {
+											margin-bottom: 5px;
+											background-image: none;
+										}
+									}
+									&:last-child {
+										background-image: url(../img/cancelar-x.svg);
+										background-repeat: no-repeat;
+										background-color: $gray;
+									}
+									@include respond-to('tablet-lg') {
+										&:last-child {
+											background-image: none;
+											background-color: $green;								}
+									}
+								}
+								@include respond-to('tablet-lg') {
+									a {
+										width: 100%;
+										height: auto;
+										color: $white;
+										text-indent: initial;
+										background: none;
+										text-decoration: none;
+										padding: 3px 5px;
+
+									}
+								}
+							}
+							@include respond-to('tablet-lg') {
+								&.citas-button {
+									display: table-cell;
+								}
+							}
+						}
+						&:last-child{
+							td {
+								border-width: 0px 1px 0px 0px;
+								&:last-child {
+									border-width: 0px 0px 0px 0px;
+								}
+							}
+						}
+					}
+				}
+			}
+			@include respond-to('tablet-lg') {
+				.table-responsive {
+					border: none;
+				}
+			}
+		}
+	}
+}
+/* ------| Paguinador table |----- */
+.page-calendario-estudiante  {
+	.view-mis-citas {
+		.text-center {
+			position: relative;
+			&::before {
+				content: "";
+				position: absolute;
+				left: 0px;
+				bottom: 42px;
+				width: 100%;
+				border-bottom: 1px solid $black;
+			}
+			.pagination {
+				li {
+					a {
+						color: black !important;
+						border: 0px solid;
+					}
+					&.active span  {
+						color: #000;
+						cursor: default;
+						background-color: #fff;
+						border-color: #000;
+						border-radius: 0px;
+					}
+					&.next > a  {
+						text-indent: -9999px;
+						background-image: url("../img/flecha.png");
+						background-size: 11px;;
+						background-position: 7px;
+						background-repeat: no-repeat;
+						transform: rotate(-89deg);
+					}
+					&.prev > a  {
+						text-indent: -9999px;
+						background-image: url("../img/flecha.png");
+						background-size: 11px;;
+						background-position: 7px;
+						background-repeat: no-repeat;
+						transform: rotate(89deg);
+					}
+
+					&.pager-last > a  {
+						text-indent: -9999px;
+						background-image: url("../img/pager-last.svg");
+						background-size: 16px;
+						background-position: 6px;
+						background-repeat: no-repeat;
+					}
+					&.pager-first > a  {
+						text-indent: -9999px;
+						background-image: url("../img/pager-last.svg");
+						background-size: 16px;
+						background-position: 6px;
+						background-repeat: no-repeat;
+						transform: rotate(177deg);
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,1016 @@
+ /* ------| Opacidad de fondo de la modales |----- */
+.page-calendario-consejero,
+.page-calendario-estudiante {
+	.backdrop-default {
+		background: rgba(49,50,50,.7) !important;
+    opacity: initial !important;
+	}
+}
+
+/*
+//------------------------------------------------------------------------------
+// Modal Crear Disponibilidad
+//------------------------------------------------------------------------------
+*/
+.page-calendario-consejero {
+	.modal-default{
+		max-width: 80% !important;
+		@include respond-to('tablet-lg'){
+			left: calc(50% - 237px) !important;
+		}
+		.modal-dialog{
+			width: 100% !important;
+			margin: 9vh auto;
+		}
+	}
+	.ctools-use-modal-processed.disponibilidad-node-form {
+		width: 100% !important;
+		height: auto !important;
+		&.alert-dismissible,
+		&.alert {
+			margin: 0px;
+			padding: 0px;
+			border: none;
+			border-radius: 0px;
+			.close {
+				position: initial;
+				margin: 0px;
+			}
+		}
+    .modal-content {
+		  border-radius: 0px !important;
+			.modal-header {
+		    text-align: center;
+		    border-bottom: 1px solid transparent;
+		    .modal-title {
+		    	font-family: $lato-Bold;
+					font-weight: bold;
+					font-size: 1.6rem;
+					color: $green;
+		    }
+		    @include respond-to('tablet-lg') {
+					.modal-title {
+						font-size: 1.8rem;
+			    }
+				}
+				.close {
+					opacity: initial;
+				}
+			}
+			.modal-body {
+		    margin: 0 auto;
+		    padding: 0px;
+		    form {
+					// */ ---| Title Consejero |--- /*
+		    	.field-name-field-encabezado {
+						margin: 0px;
+						.coment-mobil {
+							display: none;
+						}
+			    	.consejero {
+					    font-family: $lato-Bold;
+					    font-weight: bold;
+					    font-size: 1.4rem;
+					    color: $black;
+							padding: 5px 0px 5px 29px;
+					    background-color: rgba($green, 0.25);
+						}
+						.date {
+					    font-family: $lato-Bold;
+					    font-weight: bold;
+					    font-size: 1.4rem;
+					    color: $black;
+							margin-top: 10px;
+							padding: 15px 10px;
+						}
+						@include respond-to('tablet-lg') {
+							.date {
+								width: 70%;
+								margin: 0 auto;
+							}
+						}
+					}
+					// */ ---| Select Tipo de Servicio |--- /*
+					.field-name-field-tipo-de-servicio {
+   					.form-type-select {
+   						margin: 0px 10px;
+   					  label {
+   							display: none;
+	   					}
+	   					.form-control{
+						    border: 1px solid $gray-tree;
+						    border-radius: 1px !important;
+						    appearance: none;
+						    background-image: url(../img/flecha.png);
+						    background-position: 97% center;
+						    background-repeat: no-repeat;
+								background-size: 14px;
+								box-shadow: 0 0 0 1px rgba($gray-tree, .5) inset;
+						    &:focus {
+						    	border-color: $gray-tree;
+	    						outline: 0;
+	    						box-shadow: inset 0 1px 1px rgba(13, 13, 13, 0.25), 0 0 8px rgb(192, 196, 198);
+								}
+							}
+						}
+					}
+					@include respond-to('tablet-lg') {
+						.field-name-field-tipo-de-servicio {
+							width: 71%;
+							margin: 0 auto;
+							padding-bottom: 15px;
+						}
+					}
+					// */ ---| Group Fecha, Hora, Lugar, Cupo  |--- /*
+					.group-basic-info {
+						overflow: hidden;
+						// */ ---| Fecha Inicio y Fecha Fin  |--- /*
+						.field-widget-date-popup {
+							fieldset {
+								border: none;
+							}
+							legend {
+								display: none;
+							}
+							.panel-body {
+								width: auto;
+								display: block;
+								clear: initial;
+								margin: 0px;
+								padding: 0px !important;
+								> .date-no-float {
+									float: left;
+									width: 50%;
+									clear: inherit;
+								}
+								.start-date-wrapper,
+								.end-date-wrapper {
+									.form-type-date-popup {
+										padding: 0px;
+										margin: 0px;
+										display: block;
+										> label {
+											display: none;
+										}
+										.date-padding {
+											padding: 0px 10px;
+											width: 100%;
+											.form-item {
+												width: 100%;
+												label {
+													display: none;
+												}
+												input {
+													width: 100%;
+													border: 1px solid $gray-tree;
+													border-radius: 1px !important;
+													appearance: none;
+													background-image: url(../img/flecha.png);
+													background-position: 97% center;
+													background-repeat: no-repeat;
+													background-size: 14px;
+													box-shadow: 0 0 0 1px rgba($gray-tree, .5) inset;
+													&:focus {
+														border-color: $gray-tree;
+														outline: 0;
+														box-shadow: inset 0 1px 1px rgba(13, 13, 13, 0.25), 0 0 8px rgb(192, 196, 198);
+													}
+												}
+												&:nth-child(2) {
+													display: none;
+													input {
+														margin-top: 22px;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						// */ ---| Hora de Inicio y Hora Fin Option |--- /*
+						.field-widget-options-select {
+							width: 50%;
+							float: left;
+							.form-item {
+								width: 100%;
+								padding: 0px 10px;
+								label {
+									display: none;
+								}
+								.form-control{
+									border: 1px solid $gray-tree;
+									border-radius: 1px !important;
+									appearance: none;
+									background-image: url(../img/flecha.png);
+									background-position: 97% center;
+									background-repeat: no-repeat;
+									background-size: 14px;
+									box-shadow: 0 0 0 1px rgba($gray-tree, .5) inset;
+									&:focus {
+										border-color: $gray-tree;
+										outline: 0;
+										box-shadow: inset 0 1px 1px rgba(13, 13, 13, 0.25), 0 0 8px rgb(192, 196, 198);
+									}
+								}
+							}
+						}
+						// */ ---| Lugar |--- /*
+						.field-widget-text-textfield {
+							> div {
+								margin: 0px 10px;
+								.form-item {
+									width: 100%;
+									label {
+										display: none;
+									}
+									input {
+										width: 100%;
+										border: 1px solid $gray-tree;
+										box-shadow: 0 0 0 1px rgba($gray-tree, .5) inset;
+										border-radius: 1px !important;
+										appearance: none;
+									}
+								}
+							}
+						}
+					}
+					@include respond-to('tablet-lg') {
+						.group-basic-info {
+							width: 71%;
+							margin: 0 auto;
+						}
+					}
+					// */ ---| Repeticion |--- /*
+					.field-name-field-repeticion{
+						width: 98%;
+   					margin-bottom: 15px;
+   					.form-type-radios{
+   						> label {
+   							font-family: $lato-regular;
+							  font-size: 1.6rem;
+							  color: $black;
+							  font-weight: normal;
+							  margin: 10px 10px 20px;
+   						}
+   						.form-radios {
+   							display: flex;
+        				justify-content: space-around;
+        				.form-item {
+        					&:nth-child(1) {
+        						display: none;
+        					}
+      						label {
+      							font-family: $lato-regular;
+									  font-size: 1.4rem;
+									  color: $black;
+      							padding-left: 25px !important;
+      							input[type="radio"] {
+									   display: none;
+										}
+										input[type="radio"] {
+										  width: 18px;
+										  height: 19px;
+										  display: inline-block;
+										  background-color:	$white;
+										  box-sizing: border-box;
+										  border: 1px solid $black;
+										  border-radius: 0px;
+										  transition: border-color .2s;
+										  appearance: button;
+										  margin: 0px;
+    									margin-left: -26px;
+										}
+										input[type="radio"]:checked {
+										  background: url(../img/punto.svg);
+										  background-size: 100% 100%;
+										  background-repeat: no-repeat;
+										  background-color: white;
+										}
+										input[type="radio"]:focus {
+											outline: none;
+										}
+      						}
+        				}
+   						}
+   					}
+					}
+					@include respond-to('tablet-lg') {
+						.field-name-field-repeticion {
+							width: 71%;
+							margin: 0 auto;
+						}
+					}
+					// */ ---| Botones |--- /*
+					.form-actions{
+						width: 98%;
+   					display: flex;
+            flex-direction: row-reverse;
+        		justify-content: space-around;
+        		margin-bottom: 15px;
+        		a {
+					    border: 1px solid $green;
+					    color: black;
+					    background-color: $white;
+					    padding: 4px 22px;
+					    font-size: 14px;
+					    font-weight: normal;
+					   	letter-spacing: 0.6px;
+					    text-align: center;
+					    text-decoration: none;
+					    cursor: pointer;
+					    &:hover, :focus {
+								background-color: $green;
+								color: $white;
+					    }
+						}
+						button {
+							height: 31px;
+					    font-size: 14px;
+					    border-radius: 0px;
+					    color: black;
+					    letter-spacing: 0.6px;
+					    background: transparent;
+					    padding: 0px 27px !important;
+					    span, .glyphicon-refresh {
+							  display: none;
+							}
+							&:hover, :focus {
+								background-color: $green;
+								color: $white;
+								border-color: $green;
+					    }
+						}
+					}
+					@include respond-to('tablet-lg') {
+						.form-actions{
+							width: 71%;
+							margin: 0 auto;
+							margin-bottom: 15px;
+						}
+					}
+					// */ ---| Tor Diciplinario Diciplinario Session 1, Session 2 |--- /*
+					.field-name-field-tor-disciplinario-uno,
+					.field-name-field-tor-disciplinario-dos {
+						overflow: hidden;
+						margin-bottom: 0px;
+						> div {
+							.panel {
+								box-shadow: none;
+								border-color: transparent;
+								> legend {
+									background-color: #E8E8E8;
+									text-align: center;
+									padding: 5px 15px;
+									border: none;
+									span {
+										font-family: $lato-regular;
+									}
+								}
+								> .panel-body {
+									padding: 15px 0px;
+								}
+								@include respond-to('tablet-lg') {
+									> .panel-body {
+										width: 71%;
+										margin: 0 auto;
+									}
+								}
+								// */ ---| Fecha Inicio y Fecha Fin  |--- /*
+								.field-widget-date-popup {
+									legend {
+										display: none;
+									}
+									.panel-body {
+										width: auto;
+										display: block;
+										clear: initial;
+										margin: 0px;
+										padding: 0px !important;
+										> .date-no-float {
+											float: left;
+											width: 50%;
+											clear: inherit;
+										}
+										.start-date-wrapper,
+										.end-date-wrapper {
+											.form-type-date-popup {
+												padding: 0px;
+												margin: 0px;
+												display: block;
+												> label {
+													display: none;
+												}
+												.date-padding {
+													padding: 0px 10px;
+													width: 100%;
+													.form-item {
+														width: 100%;
+														label {
+															display: none;
+														}
+														input {
+															width: 100%;
+															border: 1px solid $gray-tree;
+															border-radius: 1px !important;
+															appearance: none;
+															background-image: url(../img/flecha.png);
+															background-position: 97% center;
+															background-repeat: no-repeat;
+															background-size: 14px;
+															box-shadow: 0 0 0 1px rgba($gray-tree, .5) inset;
+															&:focus {
+																border-color: $gray-tree;
+																outline: 0;
+																box-shadow: inset 0 1px 1px rgba(13, 13, 13, 0.25), 0 0 8px rgb(192, 196, 198);
+															}
+														}
+														&:nth-child(2) {
+															display: none;
+															input {
+																margin-top: 22px;
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+								// */ ---| Hora de Inicio y Hora Fin Option |--- /*
+								.field-widget-options-select {
+									width: 50%;
+									float: left;
+									.form-item {
+										width: 100%;
+										padding: 0px 10px;
+										label {
+											display: none;
+										}
+										.form-control{
+											border: 1px solid $gray-tree;
+											border-radius: 1px !important;
+											appearance: none;
+											background-image: url(../img/flecha.png);
+											background-position: 97% center;
+											background-repeat: no-repeat;
+											background-size: 14px;
+											box-shadow: 0 0 0 1px rgba($gray-tree, .5) inset;
+											&:focus {
+												border-color: $gray-tree;
+												outline: 0;
+												box-shadow: inset 0 1px 1px rgba(13, 13, 13, 0.25), 0 0 8px rgb(192, 196, 198);
+											}
+										}
+									}
+								}
+								// */ ---| Lugar |--- /*
+								.field-widget-text-textfield {
+									> div {
+										margin: 0px 10px;
+										.form-item {
+											width: 100%;
+											label {
+												display: none;
+											}
+											input {
+												width: 100%;
+												border: 1px solid $gray-tree;
+												background-image: none !important;
+												box-shadow: 0 0 0 1px rgba($gray-tree, .5) inset;
+												border-radius: 1px !important;
+												appearance: none;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+		    }
+			}
+		}
+	}
+}
+/* ------|  Alerta Disponibilidad Creada |----- */
+.page-calendario-consejero {
+	.ctools-use-modal-processed.disponibilidad-node-form.created-availabilitys-form {
+		width: 100% !important;
+		height: auto !important;
+		.modal-content {
+			border: none;
+			border-radius: 0px;
+			box-shadow: 0 0 0 10px #F6F5F6 inset;
+			.modal-header {
+				padding: 0;
+				border: none;
+				display: block;
+				overflow: hidden;
+				&::before {
+					content: "";
+					background: url("../img/andes.png")no-repeat;
+					background-size: contain;
+					width: 50px;
+					height: 50px;
+					position: absolute;
+					top: -8px;
+					left: 50%;
+					transform: translate3d(-50%, 0, 0);
+				}
+				.close {
+					display: none;
+				}
+				h4 {
+					font-family: $lato-Bold;
+					font-size: 22px;
+					color: #231F20;
+					font-weight: normal;
+					margin-top: 70px;
+					text-align: center;
+				}
+			}
+			.modal-body {
+				position: initial;
+				a {
+					position: absolute;
+					top: 15px;
+					right: 15px;
+					color: black;
+					font-size: 1.6rem;
+					text-decoration: none;
+				}
+				.availabilitys-full + .availabilitys-full {
+					margin: 15px 4em 25px;
+				}
+			}
+		}
+	}
+}
+/* ------| Calendario Miniatura Crear Disponibilidad |----- */
+.page-calendario-consejero {
+	div#ui-datepicker-div {
+		border: 1px solid #666;
+		background: white;
+		border-radius: 0px;
+		.ui-datepicker-header {
+			border: 1px solid transparent;
+			background: white;
+			.ui-icon-circle-triangle-w {
+				background: url(../img/flecha.png) no-repeat;
+				background-size: contain;
+				transform: rotate(90deg);
+			}
+			.ui-icon-circle-triangle-e {
+				background: url(../img/flecha.png) no-repeat;
+				background-size: contain;
+				transform: rotate(269deg);
+			}
+			.ui-datepicker-month, .ui-datepicker-year {
+				appearance: inherit;
+				border: 1px solid transparent;
+				background: white;
+				font-family: $lato-regular;
+				font-size: 15px;
+				font-weight: normal;
+			}
+		}
+		.ui-datepicker-calendar {
+			th {
+				font-weight: normal;
+				font-size: 13px;
+			}
+			td {
+				a {
+					border: 1px solid transparent;
+					background: white;
+					color: #000;
+					text-align: center;
+					&.ui-state-highlight  {
+						border: 1px solid #4C48A8;
+						background: #4C48A8;
+						color: white;
+					}
+				}
+			}
+		}
+	}
+}
+/*
+//------------------------------------------------------------------------------
+// Modal Editar Disponibilidad
+//------------------------------------------------------------------------------
+*/
+.page-calendario-consejero {
+	.modal-dialog.node-teaser  {
+		width: 321.163px !important;
+		height: 220.805px !important;
+		.modal-content {
+			border-radius: 0px;
+			box-sizing: border-box;
+			filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, .5));
+			&::before {
+					content: "";
+					position: absolute;
+					top: 18px;
+					left: -9px;
+					width: 2em;
+					height: 2em;
+					background-color: white;
+					transform: rotate(46deg);
+			}
+			.modal-header {
+				border-bottom: none;
+				h4#modal-title {
+					font-family: $lato-Bold;
+					font-size: 1.6rem;
+					color: $green;
+					text-align: center;
+				}
+				.close {
+					opacity: initial;
+				}
+			}
+			.modal-body {
+				article {
+					background-color: rgba($green, 0.25);
+					header {
+						display: none;
+					}
+					//fecha
+					.field-name-field-fecha {
+						display: inline-flex;
+						width: 100%;
+						.field-label {
+							display: none;
+						}
+						.date-display-single {
+							display: flex;
+							flex-direction: column;
+							font-family: $lato-regular;
+							font-size: 1.4rem;
+							color: $black;
+							padding-left: 13px;
+						}
+					}
+					//lugar
+					.field-name-field-lugar {
+						display: inline-flex;
+						width: 100%;
+						.field-label {
+							font-family: $lato-regular;
+							font-size: 1.4rem;
+							color: $black;
+							padding-left: 13px;
+						}
+						.even {
+							font-family: $lato-regular;
+							font-size: 1.4rem;
+							color: $black;
+							padding-left: 2px;
+						}
+					}
+					//tipo de servicio
+					.field-name-field-tipo-de-servicio {
+						display: inline-flex;
+						width: 100%;
+						.field-label {
+							font-family: $lato-regular;
+							font-size: 1.4rem;
+							color: $black;
+							padding-left: 13px;
+						}
+						.even {
+							a {
+								font-family: $lato-regular;
+								font-size: 14px;
+								color: $black;
+								pointer-events: none;
+								padding-left: 2px;
+							}
+						}
+					}
+					//cupos
+					.field-name-field-cupo {
+						display: inline-flex;
+						width: 100%;
+						background-color: $white;
+						padding: 10px 0px;
+						.field-label {
+							font-family: $lato-Bold;
+							font-size: 1.4rem;
+							color: $black;
+							padding-left: 13px;
+						}
+						.even {
+							font-family: $lato-Bold;
+							font-size: 1.4rem;
+							color: $black;
+						}
+					}
+					//botones
+					.field-name-field-operaciones{
+						background-color: $white;
+						.field-label {
+							display: none;
+						}
+						.operation-node {
+							display: inline-flex;
+							.create, .edit, .delete {
+								margin: 2px;
+								a {
+									text-align: center;
+									text-decoration: none;
+									width: 94px;
+									min-height: 35px;
+									display: flex;
+									justify-content: center;
+									align-items: center;
+									border: 2px solid#41B65B;
+									padding: 0px 21px;
+									font-family: $lato-regular;
+									font-size: 1.1rem;
+									line-height: 12px;
+									color: $black;
+									&:hover, :focus {
+										background-color: $green;
+										color: $white;
+									}
+								}
+							}
+						}
+					}
+					footer {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
+/* ------| Modal Alerta de eliminar la disponivilidad |----- */
+.page-calendario-consejero {
+	.ctools-modal-dialog.modal-dialog.ctools-use-modal-processed.agenda-form {
+		width: auto !important;
+		.modal-content {
+			border: none;
+			border-radius: 0px;
+			box-shadow: 0 0 0 10px #F6F5F6 inset;
+			.modal-header {
+				padding: 0;
+				border: none;
+				display: block;
+				overflow: hidden;
+				&::before {
+					content: "";
+					background: url("../img/andes.png")no-repeat;
+					background-size: contain;
+					width: 50px;
+					height: 50px;
+					position: absolute;
+					top: -8px;
+					left: 50%;
+					transform: translate3d(-50%, 0, 0);
+				}
+				.close {
+					margin: 12px;
+					opacity: initial;
+				}
+				h4 {
+					font-family: $lato-Bold;
+					font-size: 22px;
+					color: #231F20;
+					font-weight: normal;
+					margin-top: 70px;
+					text-align: center;
+				}
+			}
+			.modal-body {
+				padding: 0px 15px 15px;
+				form{
+					div:nth-child(1){
+						display: flex;
+						justify-content: center;
+						flex-direction: column;
+						align-items: center;
+					}
+					#edit-from {
+						font-family: $lato-regular;
+						font-size : 14px;
+						color : #231F20;
+						text-align: center;
+					}
+					button {
+						border: 1px solid #4cae4c;
+						border-radius: 0px;
+						color: black;
+						background-color: #ffff !important;
+						padding: 4px 22px;
+						font-size: 14px;
+						font-weight: normal;
+						line-height: 1.42857143;
+						text-align: center;
+						cursor: pointer;
+						width: 101px;
+						span {
+							display: none;
+						}
+						.glyphicon-refresh {
+							display: none;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+/*
+//------------------------------------------------------------------------------
+// Modal Calendario Mes Disponivilidades
+//------------------------------------------------------------------------------
+*/
+.page-calendario-consejero {
+	.ctools-modal-dialog.modal-dialog.availability {
+		width: auto !important;
+		.modal-content {
+			border: none;
+			border-radius: 0px;
+			.modal-header {
+				text-align: center;
+				border-bottom: 1px solid transparent;
+				padding: 0px;
+				.modal-title {
+					font-family: $lato-regular;
+					font-size: 1.4rem;
+					color: $black;
+					background-color: rgba($green, .25);
+					margin: 10px 0px;
+					padding: .5em 0px;
+				}
+				.close {
+					padding: 15px;
+					opacity: initial;
+					&:focus {
+						outline: none;
+					}
+				}
+			}
+			.modal-body {
+				position: relative;
+				padding: 10px 25px 30px;
+				&::after {
+					content: '';
+					position: absolute;
+					bottom: 10px;
+					left: 47%;
+					width: 20px;
+					height: 20px;
+					box-shadow: 0px  2px $black inset, 2px 0px $black inset;
+					transform: rotate(-135deg);
+				}
+				h1 {
+					font-family: $lato-Bold;
+					font-size: 1.8rem;
+					color: $green;
+					text-align: center;
+					margin-top: 0px;
+					margin-bottom: 15px;
+				}
+				ul {
+					margin: 0px;
+					padding: 0px;
+					list-style: none;
+					li {
+						p {
+							margin: 15px 0px;
+							text-align: left;
+							a {
+								font-family: $lato-regular;
+								font-size: 1.4rem;
+								color: #41b65b;
+								text-align: center;
+								text-decoration: none;
+								&:hover {
+									color: $green;
+								}
+							}
+							a.full{
+								color: #808184;
+								&:hover{
+									cursor: unset;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+/*
+//------------------------------------------------------------------------------
+// Citas Modal usuario no encontrado
+//------------------------------------------------------------------------------
+*/
+.page-calendario-consejero,
+.page-crear-citas {
+	.modal.fade#mostrarmodal {
+		.modal-dialog {
+			.modal-content {
+				border: none;
+				border-radius: 0px;
+				box-shadow: 0 0 0 10px #F6F5F6 inset;
+				max-width: 300px;
+				margin: 0 auto;
+				.modal-header {
+					padding: 0;
+					border: none;
+					display: block;
+					overflow: hidden;
+					&::before {
+						content: "";
+						background: url("../img/andes.png")no-repeat;
+						background-size: contain;
+						width: 50px;
+						height: 50px;
+						position: absolute;
+						top: -8px;
+						left: 50%;
+						transform: translate3d(-50%, 0, 0);
+					}
+					.close {
+						margin: 12px;
+						opacity: initial;
+					}
+					h3 {
+						display: none;
+					}
+				}
+				.modal-body {
+					h4 {
+						font-family: $lato-regular;
+						font-size: 2.2rem;
+						font-weight: 0px;
+						text-align: center;
+					}
+					p {
+						font-family: $lato-regular;
+						font-size: 1.4rem;
+						text-align: center;
+						margin-bottom: 15px
+					}
+				}
+				.modal-footer {
+					display: none;
+				}
+			}
+		}
+	}
+}
+//------------------------------------------------------------------------------
+// Filtro de mes alerta Esta disponibilidad ya se encuentra llena
+//------------------------------------------------------------------------------
+.page-calendario-consejero-mes {
+	.modal-content {
+		border: none;
+		border-radius: 0px;
+		box-shadow: 0 0 0 10px #F6F5F6 inset;
+		.modal-header {
+			padding: 0;
+			border: none;
+			display: block;
+			overflow: hidden;
+			&::before {
+				content: "";
+				background: url("../img/andes.png")no-repeat;
+				background-size: contain;
+				width: 50px;
+				height: 50px;
+				position: absolute;
+				top: -8px;
+				left: 50%;
+				transform: translate3d(-50%, 0, 0);
+			}
+			.close {
+				margin: 12px;
+				opacity: initial;
+			}
+			h4 {
+				font-family: $lato-Bold;
+				font-size: 22px;
+				color: #231F20;
+				font-weight: normal;
+				margin-top: 70px;
+				text-align: center;
+			}
+		}
+		.modal-body {
+			.availabilitys-full {
+				font-family: $lato-regular;
+				font-size : 14px;
+				color : #231F20;
+				text-align: center;
+				margin-bottom: 15px;
+			}
+		}
+	}
+}

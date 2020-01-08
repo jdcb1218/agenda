@@ -1,0 +1,275 @@
+/*
+//------------------------------------------------------------------------------
+//	historial estudiantes
+//------------------------------------------------------------------------------
+*/
+
+/* ------| Buscador |----- */
+.page-calendario-consejero {
+	.historial-estudiante-con {
+		.view-filters {
+			.views-exposed-form {
+	      .views-exposed-widgets {
+			    display: flex;
+			    justify-content: center;
+					padding: 0px;
+					margin-top: 25px;
+        	margin-bottom: 25px;
+			    .views-exposed-widget {
+			    	&:nth-child(1) {
+	        		display: inline-flex;
+	        	}
+    				padding: 0px;
+			    	label {
+			    		display: none;
+			    	}
+			    	@include respond-to('tablet-lg') {
+							label {
+								display: block;
+				    		position: relative;
+						    word-break: break-all;
+						    width: 69px;
+						    text-align: center;
+						    margin: 8px 16px 0px 0px;
+						    font-family: $lato-regular;
+						    font-size: 20px;
+						    line-height: 28.75px;
+						    color: $green;
+						    font-weight: normal;
+						    text-align: left;
+						    &::before {
+							    content: "";
+							    position: absolute;
+							    left: -22px;
+							    top: 4px;
+							    width: 0;
+							    height: 0;
+							    border-top: 10px solid transparent;
+							    border-bottom: 10px solid transparent;
+							    border-left: 10px solid $black;
+								}
+				    	}
+			    	}
+			    	.views-widget {
+			    		margin: 0px 15px;
+				    	input  {
+        				height: 32px;
+								font-family: $lato-Light;
+								font-size: 20px;
+								color: #000000;
+								border-radius: 0px;
+								border: 1px solid #F5F1F1;
+								background: #F5F1F1;
+								box-shadow: none;
+								transition: none;
+								:focus{
+							    border-color: transparent;
+							    outline: 0;
+							    box-shadow: inset 0 1px 1px transparent, 0 0 8px transparent;
+								}
+							}
+							@include respond-to('tablet-lg') {
+								input {
+									width: 537px;
+									height: 45px;
+								}
+							}
+							span {
+								display: none;
+							}
+						}
+						.dropdown {
+							ul {
+								border-radius: 0px;
+							}
+						}
+						//button Buscar
+						&.views-submit-button, &.views-reset-button {
+							button {
+								width: 30px;
+								height: 30px;
+								text-indent: -99999px;
+								margin-top: 0px !important;
+						    border-radius: 0px;
+						    border:1px solid transparent;
+						    &:hover {
+								  opacity: 0.5;
+								}
+							}
+							@include respond-to('tablet-lg') {
+								button {
+									width: 45px;
+						    	height: 45px;
+								}
+							}
+						}
+						&.views-submit-button {
+							margin-right: 10px;
+							button {
+								background: url("../img/buscar.svg")no-repeat;
+						    background-size: 19px;
+	        			background-position: 5px;
+						    background-color: #4cae4c;
+						    outline: none;
+							}
+							@include respond-to('tablet-lg') {
+								button {
+									background-size: 34px;
+							    background-position: 5px;
+								}
+							}
+						}
+						//button Reset
+						&.views-reset-button {
+							margin-right: 10px;
+							button {
+								background: url("../img/reiniciar.png")no-repeat;
+						    background-size: 19px;
+	        			background-position: 5px;
+						    background-color: #929497;
+						    outline: none;
+							}
+							@include respond-to('tablet-lg') {
+								button {
+									background-size: 34px;
+							    background-position: 5px;
+								}
+							}
+						}
+			    }
+				}
+			}
+		}
+	}
+}
+
+/* ------| Acordeon |----- */
+.page-calendario-consejero {
+	.historial-estudiante-con {
+		.informacion-estudiante {
+			//acordion
+			.ui-accordion-header {
+				&.ui-state-default {
+			    background: #E6E7E8;
+			    border-radius: 0px;
+			    a span {
+				    font-family: Lato Bold;
+				    font-weight: bold;
+				    font-size: 18px;
+				    line-height: 18px;
+				    color: #231F20;
+					}
+					.ui-accordion-header-icon {
+				    position: absolute;
+				    right: 35px;
+				    left: auto;
+				    top: 30%;
+				    margin-top: 0px;
+				    &.ui-icon {
+					    background: url("../img/flecha.png")no-repeat;
+					    background-size: contain;
+					    transform: rotate(-180deg);
+						}
+					}
+				}
+				&.ui-state-active {
+					background: #808184;
+					a span {
+					  color : #FFFFFF;
+					}
+					.ui-icon {
+						transform: rotate(0deg) !important;
+					}
+				}
+			}
+			//Datos Estudiante
+			.datos-estudiante {
+				.ui-accordion-content {
+					padding: 1em 0px 0px 0px;
+					height: auto !important;
+					border-radius: 0px;
+					.item {
+						padding-top: 10px;
+						padding-bottom: 10px;
+						> span {
+							display: block;
+							font-family: $lato-Bold;
+					    font-size: 18px;
+					    line-height: 19.75px;
+					    color : #41B65B;
+						}
+						@include respond-to('tablet-lg') {
+							> span {
+						    font-size: 20px;
+							}
+						}
+						.items {
+							background-color: rgba($gray, 0.15);
+					   	padding: 10px 5px;
+					    font-family: $lato-Light;
+					    font-size: 14px;
+					    color: $black;
+						}
+						@include respond-to('tablet-small') {
+							.items {
+						    font-size: 15px;
+							}
+						}
+						@include respond-to('tablet-lg') {
+							.items {
+						    background-color: transparent;
+						    font-size: 20px;
+							}
+						}
+					}
+					.uid {
+						display: none;
+					}
+					.dt-acudiente {
+						background: $gray-l;
+						padding: 0px;
+					}
+				}
+			}
+			//Datos Acudiente
+			.datos-acudiente {
+				margin-top: 15px;
+				.title-acudiente {
+					margin: 15px 0px;
+					span {
+						font-family: $lato-Bold;
+				    font-size: 20px;
+				    line-height: 19.75px;
+				    color: $black;
+					}
+				}
+				.item {
+					> span {
+				    color: $black !important;
+					}
+				}
+				.items {
+					background-color: $white !important;
+				}
+				@include respond-to('tablet-lg') {
+					.items {
+				    background-color: $gray-l !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

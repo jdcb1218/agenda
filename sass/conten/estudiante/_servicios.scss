@@ -1,0 +1,129 @@
+/*
+//------------------------------------------------------------------------------
+// Region region-sidebar-first
+//------------------------------------------------------------------------------
+*/
+.page-servicios-estudiante {
+  .page-header {
+    display: none;
+  }
+  .main-container.container-fluid {
+    padding: 0px;
+  }
+  .view-id-servicios {
+    .view-content {
+      .container {
+        padding: 0px;
+      }
+      ul {
+        list-style: none;
+        padding: 0px;
+        margin: 30px 0px;
+        display: flex;
+        flex-wrap: wrap;
+        li {
+          flex: 1 1 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          min-height: 86px;
+          &:hover  {
+            img {
+              filter: brightness();
+            }
+            span {
+              &::after  {
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                width: 54px;
+                height: 3px;
+                border: 3px solid #41B65B;
+              }
+              a {
+                color : #000000;
+                font-weight: bold;
+                font-family: lato;
+                font-size: 16px;
+              }
+            }
+          }
+          // /* ----| Imagen |---- */
+          .views-field-field-img-service {
+            img {
+              width: 40px;
+              height: 40px;
+            }
+          }
+          @include respond-to('phablet') {
+            .views-field-field-img-service {
+              img {
+                width: 60px;
+                height: 60px;
+              }
+            }
+          }
+          // /* ----| Texto |---- */
+          .views-field-php {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            width: 80px;
+            span.field-content {
+              position: relative;
+              a {
+                text-decoration: none;
+                color : #6D6E70;
+                font-family: $lato-Bold;
+                font-size: 1.4rem;
+                letter-spacing : -0.55px;
+              }
+              @include respond-to('tablet-small' max) {
+                a {
+                  font-size: 1.6rem;
+                }
+              }
+            }
+          }
+          @include respond-to('tablet-wide') {
+            .views-field-php {
+              width: 93px;
+            }
+          }
+        }
+        @include respond-to('tablet') {
+          li {
+            flex: 1 1 30%;
+            margin-bottom: 30px;
+            border-right: 1px solid #BBBDBF;
+            &:nth-child(3n) {
+              border-right: 0px;
+            }
+          }
+        }
+        @include respond-to('tablet-wide') {
+          li {
+            margin-bottom: 60px;
+          }
+        }
+      }
+      @include respond-to('tablet-small' max) {
+        ul {
+        -webkit-padding-start: 12px;
+          -moz-padding-start: 12px;
+        }
+      }
+    }
+    .view-footer .text-center {
+      margin-bottom: 85px;
+      @include respond-to('tablet-small') {
+        .wraper-text {
+          width: 70%;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+}

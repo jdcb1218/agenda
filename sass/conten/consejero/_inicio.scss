@@ -1,0 +1,1016 @@
+/*
+//------------------------------------------------------------------------------
+// Region region-sidebar-first
+//------------------------------------------------------------------------------
+*/
+// /* ---| Nuevo comentario |---- */
+.loader {
+	// position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	// background: url(http://loadinggif.com/images/image-selection/3.gif) 50% 50% no-repeat rgb(182, 181, 181);
+}
+
+// /* ---| default row padding y border gray |---- */
+.page-calendario-consejero,
+.page-calendario-estudiante,
+.page-calendario-coordinador {
+	> .main-container {
+		padding: 0px;
+		> h1.page-header {
+			display: none;
+		}
+		.region-content {
+			padding: 0px;
+			margin: 0px;
+		}
+	}
+	.row {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    aside {
+			padding: 0px;
+		}
+	}
+	@include respond-to('tablet') {
+		.row {
+			margin: 0px auto;
+			max-width: 750px;
+		}
+	}
+	@include respond-to('tablet-lg') {
+		.row {
+			box-shadow: 0 0 0 3px #808184;
+			// border: 3px solid $gray-tree;
+			max-width: 970px;
+		}
+	}
+	@include respond-to('desktop-p') {
+		.row {
+			max-width: 1170px;
+			margin-bottom: 40px;
+		}
+	}
+	// @include respond-to('tablet-lg') {
+	// 	.row {
+	// 		border: 3px solid $gray-tree;
+	// 		margin: auto;
+	// 		min-height: 32pc;
+	// 	}
+	// }
+}
+
+//	region-sidebar-first
+.page-calendario-consejero  {
+	.region-sidebar-first {
+		background-color: $white;
+		border: none;
+		box-shadow: none;
+		padding: 0px;
+		margin: 0px;
+		.Calendario_Contenedor,
+		.Calendario_Contenedor-estudiantes {
+			position: relative;
+			.view-header {
+				background-color: #47AC4B;
+				.col {
+					display: flex;
+					align-items: center;
+				}
+        #cbox2 {
+        	width: 20px;
+			    height: 20px;
+					background: url(../img/Menu.png);
+					background-repeat: no-repeat;
+			    background-size: contain;
+			    border-color: transparent;
+			    border-radius: 0px;
+			    border-width: 0px;
+					margin-left: 43px;
+					margin-right: 9px;
+					padding: 0px;
+					&.close {
+						background-image: url(../img/Mas.png);
+						transform: rotate(44deg);
+						opacity: initial;
+					}
+				}
+				@include respond-to('tablet-lg') {
+					#cbox2 {
+						display: none;
+					}
+				}
+				//select Meses
+				.wrapper {
+					.dropdown {
+						border: none !important;
+    				width: 182px;
+    				background-color: transparent;
+    				color: $white;
+    				&:hover {
+    					box-shadow: 0 0 5px rgba(0,0,0,0) !important;
+    				}
+    				&.open {
+    					div {
+							  width: 113px;
+							}
+    				}
+    				.selected {
+    					font-family: "Lato Black";
+							font-size: 2rem;
+						  color: $white;
+						  text-transform: uppercase;
+    					&:after {
+								box-shadow: inset 0px 0px 0px 0px #fff;
+    					}
+    				}
+    				@include respond-to('tablet-lg') {
+    					.selected {
+								color: $gray-tree;
+								font-size: 26px;
+							}
+						}
+						.carat {
+							display: none;
+						}
+						@include respond-to('tablet-lg') {
+	    				.carat {
+	    					display: block;
+						    left: 30%;
+						    top: 43px;
+						    width: 15px;
+						    height: 15px;
+						    margin-top: -10px;
+						    border: none;
+						    border-bottom: 2px solid black;
+						    border-right: 2px solid black;
+						    border-top: none;
+
+						    transform: rotate(44deg);
+							}
+						}
+						ul {
+							background: $green-secundary;
+					    -webkit-padding-start: 0px;
+					    -moz-padding-start: 0px;
+					    li {
+					    	color: $white !important;
+						    text-align: center;
+						    padding: 4px 12px;
+					    	&.active {
+							    font-weight: 700;
+							    color: rgba(224, 224, 224, 0.95) !important;
+								}
+								&.focus {
+								  background: rgba(222, 222, 222, 0.44) !important;
+								}
+					    }
+						}
+					}
+					@include respond-to('tablet-lg') {
+						.dropdown {
+							background-color: $white ;
+						}
+					}
+				}
+				//Paguinador y Mes
+				.date-nav-wrapper {
+			    width: 76.6%;
+			    position: absolute;
+			    top: 38px;
+			    left: 0px;
+			    display: inline-block;
+			    margin: 0px auto;
+			    border-right: 3px solid #BBBDBF;
+			    background-color: white;
+			    .cerrar_modal {
+		        margin: 0px;
+		        padding: 0px;
+		        button#cerrar {
+			        border-radius: 0px;
+			        background-color: transparent;
+			        border: none;
+			        font-size: 20px;
+			        margin: 0px;
+			        padding: 0px 7px 25px;
+			        vertical-align: text-top;
+			        width: 22px;
+			        height: 22px;
+				    }
+					}
+					// Flechas
+			    .pagination {
+						width: 76.6%;
+			    	display: flex;
+				    justify-content: space-between;
+				    float: none !important;
+						margin: 0px 10%;
+						position: absolute;
+						top: 52%;
+						left: 0;
+						transform: translate3d(0,-52%, 0);
+	  				li {
+	  					a {
+						    background-color: transparent;
+						    border: none;
+						    font-size: 12px;
+						    color: #000;
+						    padding: 6px 8px;
+	  					}
+	  				}
+	  			}
+	  			@include respond-to('tablet-lg') {
+	  				.pagination {
+							width: 100%;
+							margin: 0px;
+	  				}
+	  			}
+  				h3 {
+						margin: 10px 0;
+						text-align: center;
+						line-height: normal;
+						font-size: 1.5rem;
+  					a {
+							color: #000;
+							font-family: $lato-Bold;
+							font-size: 1.5rem;
+							letter-spacing : 1.5px;
+							text-decoration: none;
+							pointer-events: none;
+							cursor: default;
+							text-transform: uppercase;
+  					}
+  				}
+				}
+				@include respond-to('tablet-lg') {
+					.date-nav-wrapper {
+						margin-top: 63px;
+						position: relative;
+				    width: 100%;
+				    border: none;
+						height: auto;
+						top: 0px;
+					}
+				}
+			}
+			@include respond-to('tablet-lg') {
+				.view-header {
+					background-color: transparent;
+					display: initial;
+				}
+			}
+			//calendario
+			.view-content {
+				.calendar-calendar {
+					.month-view {
+						width: 76.6%;
+						position: absolute;
+		        top: 76px;
+		        left: 0;
+		        display: flex;
+		        justify-content: center;
+		        background: white;
+		        border-right: 3px solid #BBBDBF;
+						z-index: 2;
+						table {
+							width: 76%;
+							th {
+								background-color: transparent;
+						    color: #000;
+						    font-weight: normal;
+						    border: 1px solid transparent;
+							}
+							td {
+								&.mini {
+									.month {
+										text-align: center;
+										a {
+											color: #000;
+											text-decoration: none;
+											z-index: 2;
+											position: relative;
+										}
+									}
+								}
+								&.has-no-events {
+							    text-align: center;
+							    color: black;
+							    padding: 0px 0px 0px 0px;
+							    .mini-day-on {
+										padding: 0px;
+										text-align: center;
+									}
+								}
+								&.today {
+							    background-color: #4C48A8;
+							    color: white;
+									text-align: center;
+									.month {
+										a {
+											color: white;
+											text-decoration: none;
+										}
+									}
+								}
+							}
+						}
+						@include respond-to('tablet-lg') {
+							table {
+								width: 100%;
+							}
+						}
+					}
+					@include respond-to('tablet-lg') {
+						.month-view {
+						width: 100%;
+						position: initial;
+						display: block;
+						border: none;
+						}
+					}
+				}
+			}
+			@include respond-to('tablet-lg',max) {
+				.view-content {
+					display: none;
+				}
+			}
+		}
+		//Button Crear Disponibilidad
+		.crear_disponibilidad {
+				width: 76.6%;
+				background: white;
+        border-right: 3px solid #BBBDBF;
+        position: absolute;
+        top: 196px;
+        z-index: 2;
+			.block-title {
+				display: none;
+			}
+			#magical-modal-link {
+				margin-top: 38px;
+				text-align: center;
+		    a {
+					width: 76.6%;
+					display: block;
+			    font-family: $lato-Light;
+					font-size: 14px;
+					padding: 8px 13%;
+					margin: 0px auto;
+			    color: #FFFFFF;
+					text-decoration: none;
+					text-align: center;
+					border: 1px solid $green-l;
+					background-color: $green-l;
+					transition: all .1s;
+			    .glyphicon-refresh {
+					  display: none;
+					}
+					&:hover {
+						background-color: transparent;
+						color: $black;
+					}
+				}
+				@include respond-to('tablet-lg') {
+					a {
+						width: 100%;
+						padding: 4px;
+						font-size: 13px;
+					}
+				}
+			}
+			.cupo-disponible, .cupo-lleno, .hoy {
+				display: inline-flex;
+				justify-content: center;
+        align-items: center;
+        font-size: 12px;
+    		padding-top: 20px;
+			}
+			@include respond-to('tablet-lg') {
+				.cupo-disponible, .cupo-lleno, .hoy {
+					justify-content: flex-start;
+					padding: 26px 0px 0px 0px;
+				}
+			}
+			.cupo-disponible .caja-1 {
+		    width: 25px;
+		    height: 25px;
+		    background-color: #47AC4B;
+		    display: inline-block;
+		    margin-right: 10px;
+		    font-family: $lato-Light;
+		    font-size: 13px;
+		    color: $black;
+			}
+			.cupo-lleno .caja-2 {
+		    width: 25px;
+		    height: 25px;
+		    background-color: #6D6E70;
+		    display: inline-block;
+		    margin-right: 10px;
+			}
+			.hoy .caja-3 {
+		    width: 25px;
+		    height: 25px;
+		    background-color: #4C48A8;
+		    display: inline-block;
+		    margin-right: 10px;
+		    margin-bottom: 15px;
+			}
+			@include respond-to('tablet-lg') {
+				.hoy .caja-3 {
+					margin-bottom: 0px;
+				}
+			}
+		}
+		@include respond-to('tablet-lg') {
+			.crear_disponibilidad  {
+				width: 100%;
+				border: none;
+				position: initial;
+			}
+		}
+		// /* ----| movil ocultar para el menu |---- */
+		@include respond-to('tablet-lg', max) {
+			.Calendario_Contenedor .view-header .clearfix.date-nav-wrapper,
+			.Calendario_Contenedor .view-content .month-view,
+			.crear_disponibilidad {
+				display: none;
+				// transform: translateX(-110%);
+				z-index: 2;
+			}
+		}
+	}
+	@include respond-to('tablet-lg') {
+		.well {
+		  padding: 19px;
+		}
+	}
+}
+
+/*
+//------------------------------------------------------------------------------
+// calendario por mes
+//------------------------------------------------------------------------------
+*/
+.page-calendario-consejero-mes{
+	.Calendario_Contenedor{
+		.calendar-miniature{
+			.view-content{
+				tbody{
+					td{
+						@include respond-to('tablet-lg') {
+							&.past,
+							&.future{
+								background-color: #edf7ee;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/*
+//------------------------------------------------------------------------------
+// calendario por semanal
+//------------------------------------------------------------------------------
+*/
+.page-calendario-consejero-semanal{
+	.Calendario_Contenedor{
+		.calendar-miniature{
+			.view-content{
+				tbody{
+					td{
+						&.today {
+							color: white;
+							text-align: center;
+							.month {
+								background-color: #4C48A8;
+								z-index: 2;
+								position: relative;										
+								a {
+									color: white;
+									text-decoration: none;
+								}
+							}
+							&:before{
+								content: "";
+								position: absolute;
+								width: calc(100% - 2px);
+								background-color: #d8edd9;
+								height: 20px;
+								left: 0;
+								z-index: 0;
+							}
+						}
+						&.empty{
+							background-color: #fff;
+							z-index: 2;
+							position: relative;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/*
+//------------------------------------------------------------------------------
+// region contain region-content
+//------------------------------------------------------------------------------
+*/
+
+///* ------| Menu Dia, Semana, Mes |----- */
+.page-calendario-consejero {
+	.element-invisible,
+	.breadcrumb,
+	.page-header {
+		display: none;
+	}
+	ul.tabs--primary {
+    display: flex;
+    list-style: none;
+    background-color: transparent;
+    border-bottom: 0px solid #ddd;
+    position: absolute;
+    right: 7px;
+    z-index: 1;
+    margin-top: 7px;
+    @include respond-to('tablet-lg') {
+			&:before {
+		    content: "";
+		    width: 23px;
+		    height: 75px;
+		    border-radius: 28px;
+		    border: 2px solid #808184;
+		    position: absolute;
+		    top: -6px;
+		    right: 20px;
+		    z-index: -1;
+			}
+		}
+	 li {
+    	&:nth-child(1) {
+		    display: none;
+			}
+			a {
+		    padding: 0px !important;
+		    margin: 0px;
+		    cursor: pointer !important;
+		    display: block !important;
+		    border-radius: 0px !important;
+		    border: 0px;
+		    text-align: center;
+		    width: 56px;
+		    font-family: $lato-regular;
+		    font-size : 15px;
+				color : $black;
+				@include respond-to('tablet-lg'){
+					&:before {
+						content: "";
+						margin-right: 16px;
+						color: $white;
+						background-color: #fff;
+						background-size: cover;
+						background-repeat: no-repeat;
+						position: absolute;
+						top: 5px;
+						right: 48px;
+						display: -webkit-inline-box;
+						display: -ms-inline-flexbox;
+						display: inline-flex;
+						width: 12px;
+						height: 12px;
+					}
+				}
+			}
+			@include respond-to('tablet-lg') {
+				a {
+					text-align: left;
+				}
+			}
+			&.active {
+				a ,	a:focus, a:hover {
+			    color: #555;
+			    background-color: $white;
+			    border-bottom-color: transparent;
+			    border: 1px solid transparent;
+			  }
+			}
+			&.active  {
+				a.active {
+			    color: $green;
+			    background: transparent;
+			    border: none;
+			    border-bottom: 3px solid $green;
+			    margin: 0px 5px;
+					@include respond-to('tablet-lg') {
+						&:before {
+							content: "";
+					    margin-right: 16px;
+					    color: $green;
+					    background-color: #E8E8E8;
+					    background-image: url("../img/punto.png");
+					    background-size: cover;
+					    background-repeat: no-repeat;
+					    position: absolute;
+					    top: 5px;
+					    right: 48px;
+					    display: -webkit-inline-box;
+					    display: -ms-inline-flexbox;
+					    display: inline-flex;
+					    width: 12px;
+					    height: 12px;
+						}
+					}
+			  }
+			  @include respond-to('tablet-lg') {
+			  	a.active {
+						border-bottom: 0px solid $green;
+			    	margin: 0px;
+			  	}
+			  }
+			}
+		}
+		@include respond-to('tablet-lg') {
+			li {
+    		left: 40px;
+    	}
+		}
+	}
+	@include respond-to('tablet-lg') {
+		ul.tabs--primary {
+			flex-direction: column-reverse;
+    	align-items: flex-end;
+    	width: 25px;
+    	right: 41px;
+    	margin-top: 34px;
+		}
+	}
+}
+
+// /* ------| region-content |----- */
+.page-calendario-consejero {
+	.region-content {
+    clear: both;
+    z-index: -100;
+    // margin-top: 37px;
+		.calendar-contain {
+			margin-top: 30px;
+			.view-header {
+				//button ir a hoy
+				> a {
+					position: absolute;
+	        right: 58px;
+	        top: -30px;
+	        width: 51px;
+					font-family: $lato-Bold;
+			    font-size: 15px;
+			    color: $white;
+			    text-decoration: none;
+				}
+				@include respond-to('tablet-lg') {
+			    > a {
+						color: $purple;
+						position: initial;
+						&:hover ,:active, :focus {
+							color: rgba($purple, 0.75);
+			    	}
+		    	}
+		    }
+		    .clearfix {
+		    	margin-top: 20px;
+    			margin-bottom: 0px;
+			    //paguinadores
+			    .pagination {
+						position: absolute;
+				    top: 0px;
+				    left: 0px;
+				    li {
+				    	a  {
+				    		color: #000;
+						    background-color: transparent;
+						    border: none;
+						    text-indent: -9999%;
+						    overflow: hidden;
+						    border-left: 2px solid black !important;
+						    border-bottom: 2px solid black !important;
+						    width: 10px;
+						    height: 10px;
+						    padding: 0;
+				    	}
+				    	&.prev {
+				    		a {
+			            transform: rotate(46deg);
+							    border-top-left-radius: 0px !important;
+							    border-bottom-left-radius: 0px !important;
+							    margin-right: 27px;
+				    		}
+				    	}
+				    	&.next a {
+						    transform: rotate(224deg);
+						    border-top-right-radius: 0px !important;
+						    border-bottom-right-radius: 0px !important;
+							}
+							&:hover {
+								color: #000 !important;
+		    				background-color: transparent !important;
+							}
+				    }
+			    }
+			    //fecha calendario
+			    h3 {
+			    	width: auto;
+				    font-family: $lato-regular;
+				    font-size: 15px;
+				    color: #808081;
+				    font-weight: normal;
+				    margin-left: 66px;
+				    padding-right: 20px;
+				    float: left;
+					}
+					@include respond-to('tablet-lg') {
+						h3 {
+							font-size: 24px;
+							border-right: 2px solid #808184;
+						}
+					}
+					//nombre del consejero
+					.cotainer-name-user {
+						display: none;
+						padding-left: 20px;
+						width: auto;
+						font-family: $lato-regular;
+						font-size: 15px;
+						font-weight: normal;
+						color: $green;
+						float: left;
+					}
+					@include respond-to('tablet-lg') {
+						.cotainer-name-user {
+							display: block;
+							font-size: 24px;
+						}
+					}
+				}
+				@include respond-to('tablet-lg') {
+					.clearfix {
+						margin-top: 5px;
+						margin-bottom: 10px;
+					}
+				}
+			}
+			.view-content {
+			//Día
+				.day-view {
+					.header-body-divider,
+					.single-day-footer-processed {
+						display: none
+					}
+					#multi-day-container {
+						height: 40px !important;
+    				border-bottom: none !important;
+    				.full {
+  						.calendar-agenda-hour {
+  							span {
+							  	display: none;
+							  }
+							}
+    				}
+					}
+					#single-day-container {
+						table.full {
+							td {
+								color: $black;
+								padding: 0px !important;
+							}
+							.first {
+								div {
+									text-align: left;
+							    font-family: $lato-regular;
+							    color : #808081;
+							    .calendar-ampm {
+									  margin: 0px 3px;
+									}
+								}
+							}
+							.last {
+								.single-day {
+									border-top: 2px solid #cccccc;
+									.half-hour {
+								    border-bottom-style: dashed;
+								    border-color: #A6A8AB;
+									}
+									.dayview {
+								    color: black;
+								    border-radius: 0px !important;
+								    border: none;
+								    width: 100% !important;
+										margin: 0px;
+										&.empy {
+											background: rgba(71, 172, 75, 0.40);
+											border-left: 10px solid #47AC4B;
+										}
+										&.full {
+											background-color: rgba(109, 110, 112, 0.40);
+											border-left:  10px solid #6D6E70;
+											a {
+												pointer-events: none;
+											}
+										}
+										a.ctools-use-modal.ctools-use-modal-processed {
+									    position: absolute;
+									    text-indent: -9999px;
+									    width: 100%;
+									    height: 100%;
+									    background: transparent;
+										}
+										.contents {
+											div.field-content {
+										    margin: 2px;
+										    font-family: $lato-regular;
+										    font-size: 12px;
+										    color: $black;
+											}
+											span.field-content, .cutoff {
+												display: none !important;
+											}
+										}
+									}
+									.my-quotes .dayview {
+										background: rgba(71, 172, 75, 0.40);
+										border-left: 10px solid #47AC4B;
+									}
+								}
+							}
+    				}
+					}
+				}
+			//Semana
+				.week-view {
+					.header-body-divider,
+					.single-day-footer-processed {
+						display: none
+					}
+					#header-container {
+						th {
+							border: 0px solid #ccc;
+							background-color: #F9FAFB;
+							color: #808081;
+							font-weight: normal;
+							font-size: 12px;
+							border-top: 1px solid #808184;
+						}
+					}
+					#multi-day-container {
+						height: 40px !important;
+    				border-bottom: none !important;
+    				.full {
+  						.calendar-agenda-hour {
+  							span {
+							  	display: none;
+							  }
+							}
+    				}
+					}
+					#single-day-container {
+						.full {
+							.first {
+								div {
+									text-align: center;
+							    font-family: $lato-regular;
+							    color : #808081;
+							    .calendar-ampm {
+									  margin: 0px 3px;
+									}
+								}
+							}
+							td {
+								color: $black;
+								padding: 0px !important;
+								.single-day {
+									.half-hour {
+								    border-bottom-style: dashed;
+								    border-color: #A6A8AB;
+									}
+									.weekview {
+										// background: rgb(161, 211, 161) !important;
+										background: rgba(71, 172, 75, 0.40);
+										border-left: 10px solid #47AC4B !important;
+										border-radius: 0px !important;
+										border: 0px solid transparent;
+										font-size: x-small !important;
+										text-align: justify;
+										word-break: break-all;
+										width: 100% !important;
+										a.ctools-use-modal.ctools-use-modal-processed {
+									    position: absolute;
+									    text-indent: -9999px;
+									    width: 100%;
+									    height: 100%;
+									    background: transparent;
+										}
+										.contents {
+											.views-field {
+												div.field-content {
+											    margin: 2px;
+											    font-family: $lato-regular;
+											    font-size: 12px;
+											    color: $black;
+												}
+												span.field-content, .cutoff {
+													display: none !important;
+												}
+											}
+										}
+									}
+								}
+							}
+    				}
+					}
+				}
+			//Mes
+				.month-view {
+					.full {
+						th.days {
+							background-color: #F9FAFB;
+							color: #808081;
+							font-weight: normal;
+							border: 0px solid #ccc;
+							border-top: 1px solid #000;
+							font-size: 12px;
+						}
+						td {
+							padding: 0px !important;
+							color: $black;
+							&.date-box {
+								.month.day {
+							    float: left;
+							    font-family : Lato Regular;
+							    font-size : 21px;
+							    color : #808081;
+							    a {
+							    	color: $black;
+							    }
+								}
+							}
+							&.single-day {
+								.monthview {
+									// background: rgb(161, 211, 161);
+									background: transparent;
+									border-radius: 0px;
+										.multiple-events {
+											text-align: right;
+											a {
+												display: inline-flex;
+												justify-content: center;
+												align-items: center;
+												font-family: $lato-regular;
+												font-size: 1.4rem;
+												color: $green;
+												text-decoration: none;
+												background: transparent;
+												&::after {
+													content: '';
+													display: block;
+													width: 10px;
+													height: 10px;
+													box-shadow: 0px  2px $black inset, 2px 0px $black inset;
+													transform: rotate(-135deg);
+													margin-left: 5px;
+													margin-right: 5px;
+												}
+												&:hover {
+													opacity: .5;
+												}
+											}
+										}
+									.contents {
+										.views-field {
+											div.field-content {
+										    margin: 2px;
+										    font-family: $lato-regular;
+										    font-size: 12px;
+										    color: $black;
+											}
+											span.field-content, .cutoff, span.views-label {
+												display: none !important;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

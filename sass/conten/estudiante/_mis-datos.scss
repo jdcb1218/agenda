@@ -1,0 +1,84 @@
+/*
+//------------------------------------------------------------------------------
+//	Mis Datos
+//------------------------------------------------------------------------------
+*/
+.page-calendario-estudiante{
+  #user-profile-form {
+    fieldset.panel-default {
+      border: none;
+      margin-bottom: 0px;
+      legend {
+        display: none;
+      }
+      .collapse {
+        padding: 0px;
+      }
+      .form-wrapper {
+        label {
+          font-family: $lato-Bold;
+          font-size: 1.4rem;
+          color: $green;
+        }
+        input {
+          width: 100% !important;
+          font-family: $lato-Light;
+          font-size: 1.4rem;
+          appearance: none;
+          border-radius: 0px;
+          border: 1px solid #F5F1F1;
+          background-image: none !important;
+          background-color: #F5F1F1;
+          box-shadow: none;
+        }
+        select {
+          font-family: $lato-Light;
+          font-size: 1.4rem;
+          border-radius: 0px;
+          border: 1px solid #F5F1F1;
+          background-image: none !important;
+          background-color: #F5F1F1;
+          box-shadow: none;
+          appearance: menulist-button;
+        }
+        @include respond-to('tablet-lg') {
+          label,
+          input,
+          select {
+            font-size: 1.6rem;
+          }
+        }
+        &#edit-field-fecha-de-nacimiento .panel {
+          margin-bottom: 0;
+          border: none;
+          background-color: transparent;
+          box-shadow: none;
+          .panel-body {
+            padding: 0px;
+            .container-inline-date > .form-item {
+              margin-bottom: 0px;
+              width: 100%;
+              > .date-padding {
+                padding: 0px;
+                width: 100%;
+                > div {
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    fieldset#bootstrap-panel--3 {
+      .collapse.in {
+        background-color: $gray-l;
+        .form-wrapper {
+          label {
+            color: $black;
+          }
+        }
+      }
+    }
+  }
+}

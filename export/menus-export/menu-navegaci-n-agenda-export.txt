@@ -1,0 +1,6 @@
+Inicio {"url":"calendario-consejero\/diario","options":{"attributes":{"title":""}},"weight":"-50"}
+Citas {"url":"citas","options":{"attributes":{"title":""}},"weight":"-49"}
+Historial Estudiante {"url":"calendario-consejero\/historial-estudiante","options":{"attributes":{"title":""}},"weight":"-48"}
+Reportes TOR {"url":"calendario-consejero\/reportes-tor","options":{"attributes":{"title":""}},"weight":"-47"}
+Salir {"url":"user\/logout","options":{"attributes":{"title":""}},"weight":"-46"}
+Citas {"url":"calendario-consejero\/citas-programadas","options":{"attributes":{"title":""}},"weight":"-49"}

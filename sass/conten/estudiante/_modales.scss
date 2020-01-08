@@ -1,0 +1,380 @@
+ // /*
+//------------------------------------------------------------------------------
+//	Modales Estudiante
+//------------------------------------------------------------------------------
+// */
+// /*---| Filtro Mes Modal de consejeros disponibles |--- */
+.page-calendario-estudiante {
+  .agenda-add-quotes-students-form {
+    .modal-content {
+      border: none;
+      border-radius: 0px;
+      max-width: 400px;
+      .modal-header {
+        padding: 0;
+        border: none;
+        display: block;
+        overflow: hidden;
+        .close {
+          margin: 12px;
+          opacity: initial;
+          &:focus {
+            outline: none;
+          }
+        }
+        h4 {
+          font-family: $lato-regular;
+          font-size: 1.6rem;
+          color: #231F20;
+          text-align: left;
+          margin: 5px;
+          padding: 10px 15px;
+          background-color: rgba(71, 172, 75, 0.10);
+        }
+      }
+      .modal-body {
+        .availability-quotes-students {
+          //title
+          .form-type-item {
+            font-family: $lato-Bold;
+            font-size: 1.6rem;
+            color: $green;
+            text-align: center;
+          }
+          //campos checked
+          .form-type-checkbox {
+            text-align: left;
+            label {
+              font-family: $lato-regular;
+              font-size: 1.4rem;
+              padding-left: 27px;
+              margin-right: 9px;
+            }
+            input[type="radio"],
+            input[type="checkbox"] {
+              display: none;
+            }
+            input[type="radio"],
+            input[type="checkbox"] {
+              width: 18px;
+              height: 19px;
+              display: inline-block;
+              background-color:	$white;
+              box-sizing: border-box;
+              border: 1px solid $black;
+              border-radius: 0px;
+              transition: border-color .2s;
+              appearance: button;
+              margin: 0px;
+              margin-left: -26px;
+            }
+            input[type="radio"]:checked,
+            input[type="checkbox"]:checked {
+              background: url(../img/punto.svg);
+              background-size: 100% 100%;
+              background-repeat: no-repeat;
+              background-color: white;
+            }
+            input[type="radio"]:focus,
+            input[type="checkbox"]:focus {
+              outline: none;
+            }
+          }
+          //Selec Motivo de la cita
+          .form-type-select {
+            margin: 20px 0px;
+            label {
+              display: none;
+            }
+            .form-control{
+              border: 1px solid $gray-tree;
+              border-radius: 1px !important;
+              appearance: none;
+              background-image: url(../img/flecha.png);
+              background-position: 97% center;
+              background-repeat: no-repeat;
+              background-size: 14px;
+              box-shadow: 0 0 0 1px rgba($gray-tree, .5) inset;
+              &:focus {
+                border-color: $gray-tree;
+                outline: 0;
+                box-shadow: inset 0 1px 1px rgba(13, 13, 13, 0.25), 0 0 8px rgb(192, 196, 198);
+              }
+            }
+          }
+          //texto infomativo
+          .info-quote-student-modal {
+            text-align: right;
+            font-family: $lato-regular;
+            font-size: 1.4rem;
+          }
+          // Buttom
+          button {
+            font-family: $lato-regular;
+            font-size: 1.4rem;
+            color: $black;
+            border: 1px solid $green;
+            border-radius: 0px;
+            background-color: $white;
+            padding: 7px 20px;
+            margin-top: 15px;
+            float: right;
+          }
+        }
+      }
+    }
+  }
+}
+// /*---| Filtro Mes Gracias tu cita se ha registrado |--- */
+.page-calendario-estudiante {
+  .ctools-use-modal-processed.agenda-add-quotes-students-form.quote-isset-form {
+    width: auto !important;
+    .modal-content {
+      border: none;
+      border-radius: 0px;
+      box-shadow: 0 0 0 10px #F6F5F6 inset;
+      .modal-header {
+        padding: 0;
+        border: none;
+        display: block;
+        overflow: hidden;
+        &::before {
+          content: "";
+          background: url("../img/andes.png")no-repeat;
+          background-size: contain;
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          top: -8px;
+          left: 50%;
+          transform: translate3d(-50%, 0, 0);
+        }
+        .close {
+          margin: 12px;
+          opacity: initial;
+        }
+        h4 {
+          font-family: $lato-Bold;
+          font-size: 22px;
+          color: #231F20;
+          font-weight: normal;
+          margin-top: 70px;
+          text-align: center;
+          padding: 0px;
+          background-color: transparent;
+        }
+      }
+      .modal-body {
+        padding: 0px 15px 15px;
+        form.ctools-use-modal-processed{
+          div:nth-child(1){
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+          }
+          .quote-thx {
+            font-family: $lato-regular;
+            font-size : 14px;
+            color : #231F20;
+            text-align: center;
+            padding: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// /*---| Modal la disponibilidad se encuentra llena filtro mes  |--- */
+.page-calendario-estudiante {
+  .availabilitys-full-form {
+    .modal-content {
+      border: none;
+      border-radius: 0px;
+      max-width: 400px;
+      .modal-header {
+        padding: 0;
+        border: none;
+        display: block;
+        overflow: hidden;
+        .close {
+          margin: 12px;
+          opacity: initial;
+          &:focus {
+            outline: none;
+          }
+        }
+        h4 {
+          font-family: $lato-regular;
+          font-size: 1.6rem;
+          color: #231F20;
+          text-align: left;
+          margin: 5px;
+          padding: 10px 15px;
+          background-color: rgba(71, 172, 75, 0.10);
+        }
+      }
+      .modal-body {
+        div.availabilitys-full {
+          font-family: $lato-regular;
+          font-size: 1.4rem;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+/*
+//------------------------------------------------------------------------------
+//	Mis Datos
+//------------------------------------------------------------------------------
+*/
+/* ------| Termonos y condiciones |----- */
+.page-calendario-estudiante {
+  .ctools-modal-dialog.modal-dialog.node.node-page.node-teaser.clearfix.node-102 {
+    width: auto !important;
+    .modal-content {
+      border: none;
+      border-radius: 0px;
+      box-shadow: 0 0 0 10px #F6F5F6 inset;
+      max-width: 800px;
+      .modal-header {
+        padding: 0;
+        border: none;
+        display: block;
+        overflow: hidden;
+        &::before {
+          content: "";
+          background: url("../img/andes.png")no-repeat;
+          background-size: contain;
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          top: -8px;
+          left: 50%;
+          transform: translate3d(-50%, 0, 0);
+        }
+        .close {
+          margin: 12px;
+          opacity: initial;
+        }
+        h4 {
+          font-family: $lato-Bold;
+          font-size: 22px;
+          color: #231F20;
+          font-weight: normal;
+          margin-top: 70px;
+          text-align: center;
+        }
+      }
+      .modal-body {
+        padding: 0px 15px 15px;
+        header {
+          > h2 {
+            display: none;
+          }
+        }
+        .field-name-body {
+          > .field-label {
+            display: none;
+          }
+          .field-items {
+            padding: 15px 15px;
+            font-family: $lato-regular;
+            font-size: 1.4rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+//------------------------------------------------------------------------------
+//	Mis Citas
+//------------------------------------------------------------------------------
+*/
+/* ------| Cancelar la cita |----- */
+.page-calendario-estudiante {
+  .ctools-modal-dialog.modal-dialog.ctools-use-modal-processed{
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
+  .ctools-modal-dialog.modal-dialog.ctools-use-modal-processed.quotes-delete-form {
+    width: auto !important;
+    .modal-content {
+      border: none;
+      border-radius: 0px;
+      box-shadow: 0 0 0 10px #F6F5F6 inset;
+      .modal-header {
+        padding: 0;
+        border: none;
+        display: block;
+        overflow: hidden;
+        &::before {
+          content: "";
+          background: url("../img/andes.png")no-repeat;
+          background-size: contain;
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          top: -8px;
+          left: 50%;
+          transform: translate3d(-50%, 0, 0);
+        }
+        .close {
+          margin: 12px;
+          opacity: initial;
+        }
+        h4 {
+          font-family: $lato-Bold;
+          font-size: 22px;
+          color: #231F20;
+          font-weight: normal;
+          margin-top: 70px;
+          text-align: center;
+          padding: 0px;
+          background-color: transparent;
+        }
+      }
+      #modal-content {
+        padding: 0px 15px 15px;
+        form.ctools-use-modal-processed {
+          div:nth-child(1){
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+          }
+          #edit-from {
+            font-family: $lato-regular;
+            font-size : 14px;
+            color : #231F20;
+            text-align: center;
+          }
+          button {
+            border: 1px solid #4cae4c;
+            border-radius: 0px;
+            color: black;
+            background-color: #ffff !important;
+            padding: 4px 22px;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            cursor: pointer;
+            width: 101px;
+            span {
+              display: none;
+            }
+            .glyphicon-refresh {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

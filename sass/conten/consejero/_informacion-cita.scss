@@ -1,0 +1,516 @@
+/*
+//------------------------------------------------------------------------------
+// Información citas
+//------------------------------------------------------------------------------
+*/
+/* ------| Infomcaion de la Cita |----- */
+.node-type-disponibilidad  {
+	#disponibilidad-node-form {
+		#edit-field-encabezado {
+			display: none;
+		}
+		#edit-field-citas-agenda {
+			.tabledrag-toggle-weight-wrapper {
+				display: none;
+			}
+			.table-responsive,
+			#field-citas-agenda-values {
+				border: none;
+			}
+
+			#field-citas-agenda-values {
+				th.field-label {
+					display: none;
+				}
+				tr.draggable {
+					background-color: transparent;
+					td.field-multiple-drag {
+						display: none;
+					}
+					td {
+						padding: 15px 0px;
+						border: none;
+						position: relative;
+					}
+					// /* ---| tipo de servicio |---*/
+					.service-select {
+						display: flex;
+						flex-wrap: wrap;
+						padding: 5px 0px;
+						span {
+							font-family: $lato-regular;
+							font-size: 1.4rem;
+							color: $green;
+							white-space: normal;
+							&:first-child {
+								padding-right: 5px;
+							}
+						}
+					}
+					@include respond-to('tablet') {
+						.service-select {
+							width: 50%;
+							span {
+								font-size: 1.6rem;
+							}
+						}
+					}
+					// /*---| Motivo del estudiante |----*/
+					.reason-select-student {
+						display: flex;
+						flex-wrap: wrap;
+						padding: 5px 0px;
+						span {
+							font-family: $lato-regular;
+							font-size: 1.4rem;
+							color: $black;
+							white-space: normal;
+							&:first-child {
+								padding-right: 5px;
+							}
+						}
+					}
+					@include respond-to('tablet-lg') {
+						.reason-select-student {
+							width: 50%;
+							span {
+								font-size: 1.6rem;
+							}
+						}
+					}
+					// /*---| Selec motivo dle consegero |----*/
+					.field-widget-options-select {
+						margin-bottom: 25px;
+						.form-group {
+							label {
+								display: none;
+							}
+							.form-control {
+								border: 1px solid $gray-tree;
+								border-radius: 1px !important;
+								background-image: url(../img/flecha.png);
+								background-position: 97% center;
+								background-repeat: no-repeat;
+								background-size: 14px;
+								background-color: $white;
+								margin: 10px 0px;
+								box-shadow: 0 0 0 1px rgba($gray-tree, .5) inset;
+								appearance: none;
+								&:focus {
+									border-color: $gray-tree;
+									outline: 0;
+									box-shadow: inset 0 1px 1px rgba(13, 13, 13, 0.25), 0 0 8px rgb(192, 196, 198);
+								}
+							}
+							@include respond-to('tablet') {
+								.form-control {
+									max-width: 330px;
+								}
+							}
+						}
+					}
+					// /* ---| Default Campos Radio Button |--- */
+					.field-widget-options-buttons {
+						&.field-name-field-tipo-de-atencion {
+							.form-group > label {
+								display: none;
+							}
+						}
+						.form-radios {
+							display: flex;
+							flex-wrap: wrap;
+    					justify-content: space-around;
+							div:first-child {
+								display: none;
+							}
+						}
+						@include respond-to('tablet-lg') {
+							.form-radios {
+								justify-content: flex-end;
+							}
+						}
+						.radio {
+							label {
+								font-family: $lato-regular;
+								font-size: 1.4rem;
+								padding-left: 27px;
+								margin-right: 9px;
+							}
+							input[type="radio"] {
+								display: none;
+							}
+							input[type="radio"] {
+								width: 18px;
+								height: 19px;
+								display: inline-block;
+								background-color:	$white;
+								box-sizing: border-box;
+								border: 1px solid $black;
+								border-radius: 0px;
+								transition: border-color .2s;
+								appearance: button;
+								margin: 0px;
+								margin-left: -26px;
+							}
+							input[type="radio"]:checked {
+								background: url(../img/punto.svg);
+								background-size: 100% 100%;
+								background-repeat: no-repeat;
+								background-color: white;
+							}
+							input[type="radio"]:focus {
+								outline: none;
+							}
+						}
+						@include respond-to('tablet-lg') {
+							.radio {
+								margin-top: 0px;
+								margin-right: 15px;
+								margin-bottom: 0px;
+								&:last-child {
+									margin-right: 0px;
+								}
+							}
+						}
+					}
+					// /* ---| Radio Button asistencia |--- */
+					.field-name-field-collec-asistencia {
+						.form-group {
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							> label {
+								font-family: $lato-regular;
+								font-size: 1.4rem;
+								margin-right: 9px;
+								margin-bottom: 0px;
+							}
+							.radio {
+								margin: 0px;
+							}
+						}
+						@include respond-to('tablet-lg') {
+							.form-group {
+								justify-content: flex-end;
+								align-items: center;
+							}
+						}
+					}
+					@include respond-to('tablet-lg') {
+						.field-name-field-collec-asistencia {
+							position: absolute;
+							top: 57px;
+							right: 0px;
+						}
+					}
+					// /* ---| Psocion en destock tipo de atencion |--- */
+					@include respond-to('tablet-lg') {
+						.field-name-field-tipo-de-atencion {
+							position: absolute;
+							top: 25px;
+							right: 0px;
+						}
+					}
+				}
+			}
+		}
+	}
+	@include respond-to('tablet-lg') {
+		#disponibilidad-node-form {
+			width: 96%;
+			margin: 0px auto;
+		}
+	}
+}
+/* ------| Datos del Estudiante |----- */
+.node-type-disponibilidad {
+	.informacion-estudiante {
+		//Despliege del acordeon y active
+		.ui-accordion-header {
+			&.ui-state-default {
+		    background: #E6E7E8;
+		    border-radius: 0px;
+		    a span {
+			    font-family: $lato-Bold;
+			    font-weight: bold;
+			    font-size: 18px;
+			    line-height: 18px;
+			    color: #231F20;
+				}
+				.ui-accordion-header-icon {
+			    position: absolute;
+			    right: 35px;
+			    left: auto;
+			    top: 30%;
+			    margin-top: 0px;
+			    &.ui-icon {
+				    background: url("../img/flecha.png")no-repeat;
+				    background-size: contain;
+				    transform: rotate(-180deg);
+					}
+				}
+			}
+			&.ui-state-active {
+				background: #808184;
+				a span {
+				  color : #FFFFFF;
+				}
+				.ui-icon {
+					transform: rotate(0deg) !important;
+				}
+			}
+		}
+		//Datos estudiante
+		.datos-estudiante {
+			.ui-accordion-content {
+				padding: 1em 0px 0px 0px;
+				height: auto !important;
+				border-radius: 0px;
+				.item {
+					padding-top: 10px;
+					padding-bottom: 10px;
+					min-height: 88px;
+					> span {
+						display: block;
+						font-family: $lato-Bold;
+				    font-size: 1.4rem;
+				    line-height: 19.75px;
+						color :  $green;
+						padding: 5px 0px;
+					}
+					@include respond-to('tablet-lg') {
+						> span {
+					    font-size: 1.6rem;
+						}
+					}
+					.items {
+						background-color: rgba($gray, 0.15);
+				   	padding: 10px 5px;
+				    font-family: $lato-Light;
+				    font-size: 1.4rem;
+				    color: $black;
+					}
+					@include respond-to('tablet-lg') {
+						.items {
+					    background-color: transparent;
+					    font-size: 1.6rem;
+						}
+					}
+				}
+				.uid {
+					display: none;
+				}
+				.dt-acudiente {
+					background: $gray-l;
+					padding: 0px;
+				}
+			}
+		}
+		//Datos Acudiente
+		.datos-acudiente {
+			margin-top: 15px;
+			.title-acudiente {
+				margin: 15px 0px;
+				span {
+					font-family: $lato-Bold;
+			    font-size: 20px;
+			    line-height: 19.75px;
+			    color: $black;
+				}
+			}
+			.item {
+				> span {
+			    color: $black !important;
+				}
+			}
+			.items {
+				background-color: $white !important;
+			}
+			@include respond-to('tablet-lg') {
+				.items {
+			    background-color: $gray-l !important;
+				}
+			}
+		}
+	}
+}
+/* ------| text area comentario |----- */
+.node-type-disponibilidad  {
+  #edit-field-citas-agenda {
+		.field-widget-text-textarea-with-summary {
+			.text-format-wrapper {
+				margin: 0px;
+				> a,
+				> fieldset.filter-wrapper  {
+					display: none !important;
+				}
+			}
+			.form-type-textarea {
+				> label {
+					font-family: $lato-Bold;
+					font-size: 1.8rem;
+					margin: 15px 0px ;
+				}
+				.textarea-processed {
+					textarea {
+						border: 1px solid #58595B;
+						border-radius: 0px;
+					}
+				}
+			}
+		}
+  }
+}
+/* ------| Historila estudiantes |----- */
+.node-type-disponibilidad {
+	.historial-citas {
+		//Titulo
+		.view-header {
+			.historial {
+				font-family: $lato-Bold;
+	  		font-size: 18px;
+	  		padding-left: 15px;
+	  	  padding-bottom: 15px;
+			}
+		}
+		.view-content {
+      //Despliege del acordeon y active
+      .ui-accordion-header {
+        &.ui-state-default {
+          background: #E6E7E8;
+          border-radius: 0px;
+          a span {
+            font-family: $lato-Bold;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 18px;
+            color: #231F20;
+          }
+          .ui-accordion-header-icon {
+            position: absolute;
+            right: 35px;
+            left: auto;
+            top: 30%;
+            margin-top: 0px;
+            &.ui-icon {
+              background: url("../img/flecha.png")no-repeat;
+              background-size: contain;
+              transform: rotate(-180deg);
+            }
+          }
+        }
+        &.ui-state-active {
+          background: #808184;
+          a span {
+            color : #FFFFFF;
+          }
+          .ui-icon {
+            transform: rotate(0deg) !important;
+          }
+        }
+      }
+			// Contenido Acordeon
+			.ui-accordion-content {
+        padding: 1em 15px;
+        height: 100% !important;
+				.nombre-estudiante  {
+					width: 100%;
+			    font-family: $lato-regular;
+			    font-size: 1.7rem;
+			    line-height: 21px;
+			    color: $green;
+          padding: 5px 0px 20px;
+        }
+        @include respond-to('tablet-lg') {
+          .nombre-estudiante  {
+            font-size: 2rem;
+          }
+        }
+        .views-field-field-fecha,
+        .views-field-field-fecha-1,
+        .views-field-field-tipo-de-servicio,
+        .views-field-field-collec-motivo {
+          width: 50%;
+          float: left;
+          display: block;
+          min-height: 63px;
+          > span {
+            width: 100%;
+            display: block;
+            padding: 5px 0px;
+            font-family: $lato-Bold;
+            font-size: 1.4rem;
+            color: $black
+          }
+          .field-content {
+            font-family: $lato-Light;
+            font-size: 1.4rem;
+            color: $black;
+          }
+        }
+        @include respond-to('tablet-lg') {
+          .views-field-field-fecha,
+          .views-field-field-fecha-1 {
+            width: 18%;
+          }
+          .views-field-field-tipo-de-servicio,
+          .views-field-field-collec-motivo {
+            width: 30%;
+          }
+        }
+        .views-field-field-comentario-cita {
+          clear: both;
+          width: 100%;
+          display: block;
+          > span{
+            padding: 15px 0 10px;
+            margin-top: 15px;
+            border-top: 1px solid #231F20;
+            width: 100%;
+            display: inline-block;
+          }
+          .field-content {
+            width: 100%;
+            min-height: 70px;
+            border: 2px solid #808184;
+            padding: 20px;
+            font-family: $lato-Light;
+          }
+        }
+        .views-field-field-collec-uid  {
+          display: none;
+        }
+      }
+      @include respond-to('tablet') {
+        .ui-accordion-content {
+          padding: 1em 4em;
+        }
+      }
+		}
+	}
+}
+/* ------| Button of guardar  |----- */
+.node-type-disponibilidad {
+	#edit-actions {
+		button {
+			background-color: $green;
+			border: $green;
+			border-radius: 0px;
+			font-family: $lato-regular;
+			color: #FFFFFF;
+			padding: .5em 1.6em;
+			&:hover {
+				opacity: 0.5;
+			}
+			span {
+				display: none;
+			}
+		}
+	}
+}
+/* ------| Ocultar devel |----- */
+.node-type-disponibilidad {
+	.tabs--primary.nav.nav-tabs {
+		display: none;
+	}
+}

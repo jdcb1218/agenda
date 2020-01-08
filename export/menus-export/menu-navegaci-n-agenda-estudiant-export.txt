@@ -1,0 +1,4 @@
+Servicios {"url":"servicios-estudiante","description":"Servicios estudiantes","weight":"-50"}
+Mis Datos {"url":"menutoken\/5a3b02ef66ba7","options":{"attributes":{"title":""},"menu_token_link_path":"user\/[current-user:uid]\/edit","menu_token_data":[],"menu_token_options":{"clear":0},"alter":true},"weight":"-49"}
+Mis citas {"url":"mis-citas","options":{"attributes":{"title":""}},"weight":"-48"}
+Salir {"url":"user\/logout","options":{"attributes":{"title":""}},"weight":"0"}

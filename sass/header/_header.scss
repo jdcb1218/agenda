@@ -1,0 +1,354 @@
+/*
+//------------------------------------------------------------------------------
+// Informacion user
+//------------------------------------------------------------------------------
+*/
+.page-calendario-consejero,
+.page-calendario-coordinador,
+.page-calendario-estudiante,
+.page-servicios-estudiante,
+.page-crear-citas {
+	.user-agenda {
+		background-color: $black;
+		.block-title {
+			display: none;
+		}
+		.view-user-login {
+			display: flex;
+			flex-direction: column;
+			.view-header {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 15px 0;
+				.container-user-rol {
+					display: block;
+					max-width: 170px;
+					.consejero,
+					.estudiante,
+					.cordinador,
+					.administrator {
+						width: 40px;
+						height: 40px;
+						float: left;
+						margin: 0 5px 0 10px;
+					}
+					@include respond-to('phone') {
+						.consejero,
+						.estudiante,
+						.cordinador,
+						.administrator {
+							width: 50px;
+							height: 50px;
+							margin: 0px 10px;
+						}
+					}
+					.consejero {
+						background: url(../img/consejero.png)no-repeat;
+						background-size: contain;
+					}
+					.estudiante {
+						background: url(../img/estudiante.png)no-repeat;
+						background-size: contain;
+						background-position-x: 13px;
+					}
+					.cordinador {
+						background: url(../img/cordinador.png)no-repeat;
+						background-size: contain;
+					}
+					.administrator {
+						background: url(../img/administrator.png)no-repeat;
+						background-size: contain;
+					}
+					p {
+						font-family: $lato-Light;
+						font-size: 1.4rem;
+						color: $white;
+						float: left;
+						margin: 0px;
+						padding-top: 6px;
+					}
+					h2 {
+						font-family: $lato-Bold;
+						font-size: 1.7rem;
+						color: $white;
+						font-weight: normal;
+						line-height: 17.2px;
+						margin: 0px;
+						padding-bottom: 10px;
+						float: left;
+						position: relative;
+						&::before {
+							content: "";
+							border-bottom: 5px solid $green;
+							width: 62px;
+							position: absolute;
+							bottom: -5px;
+						}
+					}
+					@include respond-to('tablet-lg') {
+						h2 {
+							font-size: 2rem;
+						}
+					}
+				}
+			}
+			@include respond-to('phablet') {
+				.view-header {
+					flex: 3 1 0px;
+					padding: 0px;
+				}
+			}
+			@include respond-to('tablet-lg') {
+				.view-header {
+					flex: 1.5 1 0px;
+				}
+			}
+			.view-content {
+				flex: 1 1 0px;
+				.item-list {
+					padding: 0px;
+					ul {
+						list-style: none;
+						margin: 0px;
+						padding: 0 10px;
+						.views-row  {
+							border-top: 1px solid #fff;
+							padding-top: 10px;
+							padding-bottom: 15px;
+							.views-field {
+								line-height: normal;
+								padding-bottom: 2px;
+								span {
+									&:first-child {
+										text-transform: capitalize;
+										font-family: $lato-Bold;
+									}
+									font-family: $lato-Light;
+									font-size: 1.4rem;
+									color: $white;
+									line-height: 1.5rem;
+								}
+								@include respond-to('phablet') {
+									span {
+										font-size: 1.4rem;
+									}
+								}
+							}
+						}
+						@include respond-to('phablet') {
+							.views-row {
+								border: none;
+								padding: 0px;
+							}
+						}
+					}
+					@include respond-to('phablet') {
+						ul  {
+							padding: 0 0 0 30px;
+							border-left: 1px solid $white;
+						}
+					}
+				}
+			}
+			@include respond-to('phablet') {
+				.view-content {
+					flex: 7 1 0px;
+				}
+			}
+			@include respond-to('desktop-p') {
+				.view-content {
+					flex: 8 1 0px;
+				}
+			}
+		}
+		@include respond-to('phablet') {
+			.view-user-login {
+				justify-content: center;
+				align-items: center;
+				flex-direction: row;
+			}
+		}
+	}
+	@include respond-to('phablet') {
+		.user-agenda {
+			padding: 15px 0;
+		}
+	}
+	@include respond-to('tablet-lg') {
+		.user-agenda {
+			padding: 30px 0 0;
+		}
+	}
+}
+/*
+//------------------------------------------------------------------------------
+// Navegacion Agenda
+//------------------------------------------------------------------------------
+*/
+.page-calendario-consejero,
+.page-calendario-estudiante,
+.page-servicios-estudiante,
+.page-calendario-coordinador,
+.page-crear-citas {
+	.navegacion-agenda  {
+		background: $black;
+		.block-title {
+			display: none;
+		}
+		.menu {
+			display: flex;
+			justify-content: center;
+			list-style: none;
+			width: 100%;
+			border: none;
+			margin: 0px;
+			padding: 0px;
+			li {
+				background-color: white;
+				flex: 1 1 0px;
+				position: relative;
+				&::before {
+					content: "";
+					position: absolute;
+					top: 5px;
+					right: 0px;
+					width: 1px;
+					height: 80%;
+					background-color: $black;
+					z-index: 1;
+				}
+				&:last-child::before{
+					content: initial;
+				}
+				@include respond-to('tablet-lg') {
+					&::before {
+						content: "";
+						position: absolute;
+						top: 0px;
+						right: 0px;
+						width: 1px;
+						height: 100%;
+						background-color: $black;
+						z-index: 1;
+					}
+				}
+				a {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-family: $lato-Black;
+					font-size: 1.8vw;
+					font-weight: normal;
+					color: $black;
+					text-align: center;
+					text-decoration: none;
+					height: 100%;
+					padding: 10px 15px;
+					&:hover,
+					&:focus {
+						background: $green-l !important;
+						color: $white;
+					}
+				}
+				@include respond-to('tablet') {
+					a {
+						font-size: 1.4rem
+					}
+				}
+				&.active-trail.active a {
+					background: $green-l;
+					color: $white;
+				}
+			}
+			@include respond-to('tablet-lg') {
+				li {
+					flex: 0 1 133px;
+					height: 46px;
+					border-bottom: 1px solid $gray;
+				}
+			}
+		}
+		@include respond-to('tablet') {
+			.menu {
+				margin: 0px auto;
+				max-width: 750px;
+			}
+		}
+		@include respond-to('tablet-lg') {
+			.menu {
+				justify-content: flex-end;
+				max-width: 970px;
+			}
+		}
+		@include respond-to('desktop-p') {
+			.menu {
+				max-width: 1170px;
+			}
+		}
+	}
+}
+/*
+//------------------------------------------------------------------------------
+// Agenda de servicios
+//------------------------------------------------------------------------------
+*/
+.title-agenda-de-servicio {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80px;
+	background-color: $gray-l;
+	.block-title {
+		display: none;
+	}
+	.imagen {
+    height: 39px;
+    width: 47px;
+    background: url(../img/agenda_servicios.png)no-repeat;
+    background-size: contain;
+	}
+	@include respond-to('tablet-lg') {
+		.imagen {
+			height: 71px;
+		  width: 82px;
+		}
+	}
+	.contenedor {
+    margin-left: 0px;
+    h2 {
+    	width: 100px;
+    	font-family: $lato-regular;
+      font-size: 18px;
+      line-height: 19.84px;
+    	margin: 0px auto;
+	    color: $black;
+    }
+    @include respond-to('tablet-lg') {
+			h2 {
+				width: 251px;
+		    font-size : 47px;
+  			line-height : 49.84px;
+	    }
+    }
+		>h2 + h2 {
+			font-family: $lato-Bold;
+		}
+	}
+	@include respond-to('tablet-lg') {
+		.contenedor {
+			margin-left: 20px;
+		}
+	}
+}
+@include respond-to('phablet') {
+	.title-agenda-de-servicio {
+			height: 111px;
+	}
+}
+@include respond-to('tablet-lg') {
+	.title-agenda-de-servicio {
+			height: 165px;
+			background-color: $white;
+	}
+}

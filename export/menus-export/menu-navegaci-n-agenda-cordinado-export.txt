@@ -1,0 +1,3 @@
+Reportes TOR {"url":"reportes-tor","options":{"attributes":{"title":""}},"weight":"0"}
+Salir {"url":"user\/logout","options":{"attributes":{"title":""}},"weight":"0"}
+Reportes TOR {"url":"calendario-coordinador\/reportes-tor","options":{"attributes":{"title":""}},"weight":"0"}

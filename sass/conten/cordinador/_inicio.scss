@@ -1,0 +1,344 @@
+/*
+//------------------------------------------------------------------------------
+//  Inicio
+//------------------------------------------------------------------------------
+*/
+.page-calendario-coordinador {
+  .main-container.container-fluid {
+    .col-sm-12 {
+       > h1.page-header {
+        display: none;
+      }
+    }
+  }
+}
+/* ------| Buscador |----- */
+.page-calendario-coordinador {
+	.view-reportes-tor {
+		.view-filters {
+			.views-exposed-form {
+	      .views-exposed-widgets {
+			    display: flex;
+			    justify-content: center;
+					padding: 0px;
+					margin-top: 25px;
+        	margin-bottom: 25px;
+			    .views-exposed-widget {
+			    	&:nth-child(1) {
+	        		display: inline-flex;
+	        	}
+    				padding: 0px;
+			    	label {
+			    		display: none;
+			    	}
+			    	@include respond-to('tablet-lg') {
+							label {
+								display: block;
+				    		position: relative;
+						    word-break: break-all;
+						    width: 69px;
+						    text-align: center;
+						    margin: 8px 16px 0px 0px;
+						    font-family: $lato-regular;
+						    font-size: 20px;
+						    line-height: 28.75px;
+						    color: $green;
+						    font-weight: normal;
+						    text-align: left;
+						    &::before {
+							    content: "";
+							    position: absolute;
+							    left: -22px;
+							    top: 4px;
+							    width: 0;
+							    height: 0;
+							    border-top: 10px solid transparent;
+							    border-bottom: 10px solid transparent;
+							    border-left: 10px solid $black;
+								}
+				    	}
+			    	}
+			    	.views-widget {
+			    		margin: 0px 15px;
+				    	input  {
+        				height: 32px;
+								font-family: $lato-Light;
+								font-size: 20px;
+								color: #000000;
+								border-radius: 0px;
+								border: 1px solid #F5F1F1;
+								background: #F5F1F1;
+								box-shadow: none;
+								transition: none;
+								:focus{
+							    border-color: transparent;
+							    outline: 0;
+							    box-shadow: inset 0 1px 1px transparent, 0 0 8px transparent;
+								}
+							}
+							@include respond-to('tablet-lg') {
+								input {
+									width: 537px;
+									height: 45px;
+								}
+							}
+							span {
+								display: none;
+							}
+						}
+						.dropdown {
+							ul {
+								border-radius: 0px;
+							}
+						}
+						//button Buscar
+						&.views-submit-button, &.views-reset-button {
+							button {
+								width: 30px;
+								height: 30px;
+								text-indent: -99999px;
+								margin-top: 0px !important;
+						    border-radius: 0px;
+						    border:1px solid transparent;
+						    &:hover {
+								  opacity: 0.5;
+								}
+							}
+							@include respond-to('tablet-lg') {
+								button {
+									width: 45px;
+						    	height: 45px;
+								}
+							}
+						}
+						&.views-submit-button {
+							margin-right: 10px;
+							button {
+								background: url("../img/buscar.svg")no-repeat;
+						    background-size: 19px;
+	        			background-position: 5px;
+						    background-color: #4cae4c;
+						    outline: none;
+							}
+							@include respond-to('tablet-lg') {
+								button {
+									background-size: 34px;
+							    background-position: 5px;
+								}
+							}
+						}
+						//button Reset
+						&.views-reset-button {
+							margin-right: 10px;
+							button {
+								background: url("../img/reiniciar.png")no-repeat;
+						    background-size: 19px;
+	        			background-position: 5px;
+						    background-color: #929497;
+						    outline: none;
+							}
+							@include respond-to('tablet-lg') {
+								button {
+									background-size: 34px;
+							    background-position: 5px;
+								}
+							}
+						}
+			    }
+				}
+			}
+		}
+	}
+}
+/* ------| Table |----- */
+.page-calendario-coordinador {
+	.view-reportes-tor {
+		.view-content {
+			.table-responsive {
+				border: 1px solid $gray;
+				// &::-webkit-scrollbar {
+			  //   width: 1em;
+				// }
+				// &::-webkit-scrollbar-track {
+				// 	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+				// }
+				// &::-webkit-scrollbar-thumb {
+				//   background-color: $gray;
+				//   outline: 1px solid $gray;
+				// }
+				table {
+				  width: 99%;
+				  tr {
+				  	&.odd, &.even {
+				  		background-color: #F5F1F1 !important;
+				  	}
+					  th {
+							font-family: $lato-regular;
+							font-size: 14px;
+							color: #4cae4c;
+							border-bottom: 2px solid transparent;
+							line-height: 15px;
+							text-align: center;
+							vertical-align: text-top;
+							&.numero-documento, &.nombre-estudiante, &.apellido-estudiante {
+								width: 93px; /* 135px */
+			    			white-space: initial;
+							}
+						}
+						td {
+							border-width: 0px 1px 1px 1px;
+					    border-bottom-style: dashed;
+					    border-right-style: solid;
+					    border-color: $gray;
+					    vertical-align: inherit;
+					    text-align: center;
+					    font-family: $lato-regular;
+					    font-size: 12px;
+					    line-height: 19.75px;
+					    color: $black;
+					    padding: 5px 8px;
+					    white-space:nowrap;
+					    &:last-child {
+							  border-width: 0px 0px 1px 0px;
+							}
+							&.citas-button {
+								display: inline-flex;
+								a {
+										display: block;
+						        text-indent: -9999px;
+						        overflow: hidden;
+						        background-size: 70%;
+						        background-position: 57%;
+						        border: none;
+						        width: 34px;
+						        height: 34px;
+						        filter: brightness(1);
+						        margin: 0px 5px;
+									&:first-child {
+						        background-image: url(../img/button-mas.svg);
+						        background-repeat: no-repeat;
+						        background-color: $green;
+									}
+									@include respond-to('tablet-lg') {
+										&:first-child {
+											margin-bottom: 5px;
+											background-image: none;
+										}
+									}
+									&:last-child {
+						        background-image: url(../img/cancelar-x.svg);
+						        background-repeat: no-repeat;
+						        background-color: $gray;
+									}
+									@include respond-to('tablet-lg') {
+										&:last-child {
+											background-image: none;
+											background-color: $green;								}
+									}
+								}
+								@include respond-to('tablet-lg') {
+									a {
+										width: 100%;
+										height: auto;
+										color: $white;
+										text-indent: initial;
+										background: none;
+										text-decoration: none;
+										padding: 3px 5px;
+
+									}
+								}
+							}
+							@include respond-to('tablet-lg') {
+								&.citas-button {
+									display: table-cell;
+								}
+							}
+						}
+						&:last-child{
+							td {
+						  	border-width: 0px 1px 0px 0px;
+						  	&:last-child {
+								  border-width: 0px 0px 0px 0px;
+								}
+							}
+						}
+					}
+				}
+			}
+			@include respond-to('tablet-lg') {
+				.table-responsive {
+					border: none;
+				}
+			}
+		}
+	}
+}
+/* ------| Paguinador table |----- */
+.page-calendario-coordinador {
+	.view-reportes-tor {
+		.text-center {
+			position: relative;
+			&::before {
+		    content: "";
+		    position: absolute;
+		    left: 0px;
+		    bottom: 42px;
+		    width: 100%;
+		    border-bottom: 1px solid $black;
+			}
+			.pagination {
+				li {
+          background-color: white;
+
+					a {
+						color: black !important;
+            border: 0px solid;
+            margin: 0px;
+            display: block;
+            width: 32px;
+            height: 32px;
+					}
+					&.active span  {
+				    color: #000;
+				    cursor: default;
+				    background-color: #fff;
+				    border-color: #000;
+				    border-radius: 0px;
+					}
+					&.next > a  {
+            font-size: 0px;
+						background-image: url("../img/flecha.png");
+						background-size: 11px;;
+            background-position: center;
+						background-repeat: no-repeat;
+						transform: rotate(-89deg);
+					}
+					&.prev > a  {
+            font-size: 0px;
+				    background-image: url("../img/flecha.png");
+				    background-size: 11px;;
+            background-position: center;
+				    background-repeat: no-repeat;
+				    transform: rotate(89deg);
+					}
+					&.pager-last > a  {
+            font-size: 0px;
+				    background-image: url("../img/pager-last.svg");
+				    background-size: 16px;
+            background-position: center;
+				    background-repeat: no-repeat;
+					}
+					&.pager-first > a  {
+            font-size: 0px;
+				    background-image: url("../img/pager-last.svg");
+				    background-size: 16px;
+            background-position: center;
+				    background-repeat: no-repeat;
+				    transform: rotate(177deg);
+					}
+				}
+			}
+		}
+	}
+}
